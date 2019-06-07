@@ -4,10 +4,10 @@ from src.cspace_visualizer import *
 import os
 if not os.path.exists("images"):
   os.makedirs("images")
-from worlds import manipulator_2dof as Environment
+from worlds import manipulator_2dof as World
 from matplotlib.ticker import MaxNLocator
 
-world = Environment.Manipulator2dof()
+world = World.Manipulator2dof()
 worldName = world.getName()
 N = 200
 
@@ -58,11 +58,11 @@ ax.tick_params(axis='both', which='major', pad=15)
 lim=1.1
 plt.axis([-lim,lim,-lim,lim])
 
-world.GRAY = c1
+world.COLOR = c1
 world.plotRobotAtConfig(ax,p1)
-world.GRAY = c2
+world.COLOR = c2
 world.plotRobotAtConfig(ax,p2)
-world.GRAY = c3
+world.COLOR = c3
 world.plotRobotAtConfig(ax,p3)
 
 w1 = world.getEndeffectorPositions(p1)

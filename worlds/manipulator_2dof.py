@@ -4,13 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from src.distance_point_line import DistPointLine
 
-GRAY = (0.8,0.8,0.8)
-R1=0.05
-link_width=10
-L1 = 0.5
-L2 = 0.5
-
 class Manipulator2dof(World):
+  COLOR = (0.8,0.8,0.8) 
+  R1=0.05 #radius of joint
+  LINK_WIDTH=10 #width of both links
+  L1 = 0.5 #link length 1
+  L2 = 0.5 #link length 2
+
 
   def getObstacleSpheres(self):
     R1 = 0.25
@@ -45,10 +45,10 @@ class Manipulator2dof(World):
     x = np.zeros((3,2))
     x[0,0]=0
     x[0,1]=0
-    x[1,0]=L1*np.cos(q[0])
-    x[1,1]=L1*np.sin(q[0])
-    x[2,0]=L1*np.cos(q[0])+L2*np.cos(q[0]+q[1])
-    x[2,1]=L1*np.sin(q[0])+L2*np.sin(q[0]+q[1])
+    x[1,0]=self.L1*np.cos(q[0])
+    x[1,1]=self.L1*np.sin(q[0])
+    x[2,0]=self.L1*np.cos(q[0])+self.L2*np.cos(q[0]+q[1])
+    x[2,1]=self.L1*np.sin(q[0])+self.L2*np.sin(q[0]+q[1])
     return x
 
   def distanceToSphere(self, q, x_sphere, y_sphere, r_sphere):
@@ -69,27 +69,27 @@ class Manipulator2dof(World):
   def plotJoint(self, ax, x, y, R):
     c=plt.Circle((x,y),R+R/3.0,color='black',zorder=2)
     ax.add_artist(c)
-    c=plt.Circle((x,y),R,color=GRAY,zorder=3)
+    c=plt.Circle((x,y),R,color=self.COLOR,zorder=3)
     ax.add_artist(c)
     c=plt.Circle((x,y),R-R/2.0,color='black',zorder=4)
     ax.add_artist(c)
 
-  def plotRobotAtConfig(self, ax,q):
+  def plotRobotAtConfig(self, ax, q):
 
     x = self.getWorldPositions(q)
-    self.plotJoint(ax,x[0,0],x[0,1],3.0/2.0*R1)
-    self.plotJoint(ax,x[1,0],x[1,1],R1)
-    self.plotJoint(ax,x[2,0],x[2,1],R1)
-    plt.plot(x[:,0],x[:,1],color='black',linewidth=link_width+link_width/2.0,zorder=1)
-    plt.plot(x[:,0],x[:,1],color=GRAY,linewidth=link_width,zorder=1)
+    self.plotJoint(ax,x[0,0],x[0,1],3.0/2.0*self.R1)
+    self.plotJoint(ax,x[1,0],x[1,1],self.R1)
+    self.plotJoint(ax,x[2,0],x[2,1],self.R1)
+    plt.plot(x[:,0],x[:,1],color='black',linewidth=self.LINK_WIDTH+self.LINK_WIDTH/2.0,zorder=1)
+    plt.plot(x[:,0],x[:,1],color=self.COLOR,linewidth=self.LINK_WIDTH,zorder=1)
 
-  def plot1DOFAtConfig(self, ax,q):
+  def plot1DOFAtConfig(self, ax, q):
 
     x = self.getWorldPositions(q)
-    self.plotJoint(ax,x[0,0],x[0,1],3.0/2.0*R1)
-    self.plotJoint(ax,x[1,0],x[1,1],R1)
-    plt.plot(x[0:2,0],x[0:2,1],color='black',linewidth=link_width+link_width/2.0,zorder=1)
-    plt.plot(x[0:2,0],x[0:2,1],color=GRAY,linewidth=link_width,zorder=1)
+    self.plotJoint(ax,x[0,0],x[0,1],3.0/2.0*self.R1)
+    self.plotJoint(ax,x[1,0],x[1,1],self.R1)
+    plt.plot(x[0:2,0],x[0:2,1],color='black',linewidth=self.LINK_WIDTH+self.LINK_WIDTH/2.0,zorder=1)
+    plt.plot(x[0:2,0],x[0:2,1],color=self.COLOR,linewidth=self.LINK_WIDTH,zorder=1)
 
   def plotObstacles(self, ax):
 
@@ -98,7 +98,7 @@ class Manipulator2dof(World):
     def plotSphere(ax,x,y,R):
       c=plt.Circle((x,y),R,color='black',zorder=-1)
       ax.add_artist(c)
-      c=plt.Circle((x,y),R-0.02,color=GRAY,zorder=0)
+      c=plt.Circle((x,y),R-0.02,color=self.COLOR,zorder=0)
       ax.add_artist(c)
 
     for k in range(X.shape[0]):
