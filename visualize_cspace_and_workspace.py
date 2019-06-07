@@ -9,7 +9,7 @@ from matplotlib.ticker import MaxNLocator
 
 world = Environment.Manipulator2dof()
 worldName = world.getName()
-N = 80
+N = 200
 
 c1 = (0.9,0.9,0.9)
 c2 = (0.7,0.7,0.7)
