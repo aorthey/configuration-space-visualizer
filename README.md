@@ -12,6 +12,7 @@ Visualize simple configuration spaces and workspaces
 <img src="https://github.com/aorthey/configuration-space-visualizer/raw/master/examples/manipulator2dof_configuration_space.png" width="300">
  
 </p>
+
      python visualize_quotient_space.py
 
 <p align="center">
