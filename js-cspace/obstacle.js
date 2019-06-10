@@ -23,5 +23,3 @@ Obstacle.prototype.contains = function(mx, my) {
   return  (this.x <= mx) && (this.x + this.w >= mx) &&
           (this.y <= my) && (this.y + this.h >= my);
 };
-
-

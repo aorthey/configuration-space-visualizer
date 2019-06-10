@@ -1,3 +1,6 @@
+//*****************************************************************************
+//Control Elements
+//*****************************************************************************
 function userEventSlider(event) {
   documentState.robot.l1 = lengthL1.value;
   documentState.robot.l2 = lengthL2.value;
@@ -37,18 +40,16 @@ function CreateSlider(name, min, max, step, value){
 //*****************************************************************************
 //documentState
 //*****************************************************************************
-function DocumentState(canvas, cspaceCanvas) {
+function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
   this.canvas = canvas;
   this.width = canvas.width;
   this.height = canvas.height;
   this.ctx = canvas.getContext('2d');
-  //this.cspaceCanvas = cspaceCanvas;
-  //this.ctxCspace = cspaceCanvas.getContext('2d');
-  //this.ctxCspace.imageSmoothingEnabled = true;
   this.ctx.imageSmoothingEnabled = true;
-  //this.ctxCspace.translate(0.5, 0.5)
 
   this.canvas_cspace = new CanvasConfigurationSpace(cspaceCanvas);
+  this.canvas_qspace = new CanvasConfigurationSpace(qspaceCanvas);
+  this.canvas_qspace.qspace = true;
 
   var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
   if (document.defaultView && document.defaultView.getComputedStyle) {
@@ -65,8 +66,10 @@ function DocumentState(canvas, cspaceCanvas) {
 
   this.valid = false; // when set to false, the canvas will redraw everything
   this.obstacles = [];
+
   this.robot = new Robot();
   this.canvas_cspace.robot = this.robot;
+  this.canvas_qspace.robot = this.robot;
 
   this.dragging = false; // Keep track of when we are dragging
   this.selection = null;
@@ -144,6 +147,7 @@ DocumentState.prototype.addObstacle = function(o) {
 DocumentState.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
   this.canvas_cspace.clear();
+  this.canvas_qspace.clear();
 }
 
 DocumentState.prototype.draw = function() {
@@ -176,6 +180,7 @@ DocumentState.prototype.draw = function() {
     
     this.robot.draw(ctx);
     this.canvas_cspace.draw();
+    this.canvas_qspace.draw();
     this.valid = true;
   }
 }
@@ -193,9 +198,10 @@ DocumentState.prototype.getMouse = function(e) {
 
   mx = e.pageX - offsetX;
   my = e.pageY - offsetY;
+  outputD3.innerHTML = mx;
+  outputD4.innerHTML = my;
   return {x: mx, y: my};
 }
-
 
 //Window Resize Event
 DocumentState.prototype.windowResizeEvent = function() {
@@ -209,11 +215,15 @@ DocumentState.prototype.windowResizeEvent = function() {
   }
   cspace.width = workspace.width;
   cspace.height = workspace.height;
+  qspace.width = workspace.width;
+  qspace.height = workspace.height;
 
   this.width = workspace.width;
   this.height = workspace.height;
   this.canvas_cspace.width = workspace.width;
   this.canvas_cspace.height = workspace.height;
+  this.canvas_qspace.width = workspace.width;
+  this.canvas_qspace.height = workspace.height;
   this.valid = false;
 }
 //var addEvent = function(object, type, callback) {
@@ -236,15 +246,16 @@ function init(){
   fillColor = "#AAAAAA";
 
   cspace = document.getElementById("configuration-space");
-  //qspace = document.getElementById("quotient-space");
+  qspace = document.getElementById("quotient-space");
   workspace = document.getElementById("workspace");
-  //workspaceReduced = document.getElementById("workspace-reduced");
 
-  documentState = new DocumentState(workspace, cspace);
+  documentState = new DocumentState(workspace, cspace, qspace);
   outputD1 = document.getElementById("wSize");
   outputD2 = document.getElementById("hSize");
   outputD3 = document.getElementById("posCircleWorld");
   outputD4 = document.getElementById("posCircleCanvas");
+  outputRobotPoseQ1 = document.getElementById("robot_q1");
+  outputRobotPoseQ2 = document.getElementById("robot_q2");
 
   qL1 = CreateSlider("Joint1 Angle", -3.14, 3.14, 0.01, 0);
   qL2 = CreateSlider("Joint2 Angle", -3.14, 3.14, 0.01, 0);

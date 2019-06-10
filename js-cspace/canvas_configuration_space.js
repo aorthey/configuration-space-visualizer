@@ -5,14 +5,49 @@ function CanvasConfigurationSpace(canvas)
   this.height = canvas.height;
   this.ctx = canvas.getContext('2d');
   this.valid = false;
+  this.qspace = false;
+  this.resolution_step = 5; //higher => faster but coarser image
 
+  // var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
+  if (document.defaultView && document.defaultView.getComputedStyle) {
+    this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingLeft'], 10)      || 0;
+    this.stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingTop'], 10)       || 0;
+    this.styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderLeftWidth'], 10)  || 0;
+    this.styleBorderTop   = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderTopWidth'], 10)   || 0;
+  }
+  var html = document.body.parentNode;
+  this.htmlTop = html.offsetTop;
+  this.htmlLeft = html.offsetLeft;
+  var myState = this;
   canvas.addEventListener('mousedown', function(e) {
-    var mouse = documentState.getMouse(e);
+    var mouse = myState.getMouse(e);
     var mx = mouse.x;
     var my = mouse.y;
-    outputD3.innerHTML = mx;
-    outputD4.innerHTML = my;
+    var cspaceCoords = myState.CanvasCspaceToConfiguration(mx, my);
+    if(myState.qspace){
+      myState.robot.update(cspaceCoords.q1, myState.robot.q2);
+    }else{
+      myState.robot.update(cspaceCoords.q1, cspaceCoords.q2);
+    }
+
+    documentState.valid = false;
+    documentState.draw();
   }, true);
+}
+
+CanvasConfigurationSpace.prototype.getMouse = function(e) {
+  var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
+  if (element.offsetParent !== undefined) {
+    do {
+      offsetX += element.offsetLeft;
+      offsetY += element.offsetTop;
+    } while ((element = element.offsetParent));
+  }
+  offsetX += this.stylePaddingLeft + this.styleBorderLeft + this.htmlLeft;
+  offsetY += this.stylePaddingTop + this.styleBorderTop + this.htmlTop;
+  mx = e.pageX - offsetX;
+  my = e.pageY - offsetY;
+  return {x: mx, y: my};
 }
 
 CanvasConfigurationSpace.prototype.update = function(w, h) {
@@ -27,11 +62,11 @@ CanvasConfigurationSpace.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
 }
 CanvasConfigurationSpace.prototype.CanvasCspaceToConfiguration = function(x,y){
-  var s = ((x / this.width) * 2*Math.PI) - Math.PI;
-  var e = ((y / this.height) * 2*Math.PI) - Math.PI;
+  var q1 = ((x / this.width) * 2*Math.PI) - Math.PI;
+  var q2 = (((y / this.height) * 2*Math.PI) - Math.PI);
   return{ 
-    q1: s, 
-    q2: e
+    q1: q1, 
+    q2: q2
   };
 }
 CanvasConfigurationSpace.prototype.ConfigurationToCanvasCspace = function(q1, q2){
@@ -96,37 +131,47 @@ function hitBlock(segment, block) {
   );
   return bottom | top | left | right;
 }
+
+CanvasConfigurationSpace.prototype.drawLabels = function() {
+
+}
+
 CanvasConfigurationSpace.prototype.draw = function() {
-  var step = 2;
   var q1_old = this.robot.q1;
   var q2_old = this.robot.q2;
-  for (var x = 0; x < this.width; x+=step) {
-    for (var y = 0; y < this.height; y+=step) {
+  for (var x = 0; x < this.width; x+=this.resolution_step) {
+    for (var y = 0; y < this.height; y+=this.resolution_step) {
       var cspaceCoords = this.CanvasCspaceToConfiguration(x,y);
       this.robot.update(cspaceCoords.q1, cspaceCoords.q2);
 
       var color = "white";
 
-      var obstacle = documentState.obstacles[0];
-      var block = { x1: obstacle.x, y1: obstacle.y, x2: obstacle.x+obstacle.w, y2: obstacle.y+obstacle.h };
-      var cCoords = this.robot.CanvasToWorldCoordinates(block.x1, block.y1);
-      block.x1 = cCoords.x;
-      block.y1 = cCoords.y;
-      cCoords = this.robot.CanvasToWorldCoordinates(block.x2, block.y2);
-      block.x2 = cCoords.x;
-      block.y2 = cCoords.y;
+      for (var i = 0; i < documentState.obstacles.length; i++)
+      {
+        var obstacle = documentState.obstacles[i];
+        var block = { x1: obstacle.x, y1: obstacle.y, x2: obstacle.x+obstacle.w, y2: obstacle.y+obstacle.h };
+        var cCoords = this.robot.CanvasToWorldCoordinates(block.x1, block.y1);
+        block.x1 = cCoords.x;
+        block.y1 = cCoords.y;
+        cCoords = this.robot.CanvasToWorldCoordinates(block.x2, block.y2);
+        block.x2 = cCoords.x;
+        block.y2 = cCoords.y;
 
-      var feasible = hitBlock(this.robot.L2, block) | hitBlock(this.robot.L1, block);
-      if (feasible) {
-        color = "lightgray";
+        var feasible = hitBlock(this.robot.L1, block);
+        if (!this.qspace){
+          feasible |= hitBlock(this.robot.L2, block);
+        }
+        if (feasible) {
+          color = "lightgray";
+        }
+
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x, y, this.resolution_step, this.resolution_step);
+        this.ctx.fill();
+        this.ctx.restore();
       }
-
-      this.ctx.save();
-      this.ctx.beginPath();
-      this.ctx.fillStyle = color;
-      this.ctx.fillRect(x, y, step, step);
-      this.ctx.fill();
-      this.ctx.restore();
     }
   }
 
@@ -135,15 +180,28 @@ CanvasConfigurationSpace.prototype.draw = function() {
   var canvasCoords = this.ConfigurationToCanvasCspace(q1_old, q2_old);
   var x = canvasCoords.x;
   var y = canvasCoords.y;
+  outputD3.innerHTML = x;
+  outputD4.innerHTML = y;
 
+  this.drawLabels();
   this.ctx.save();
   this.ctx.beginPath();
   this.ctx.fillStyle = "red";
-  var lCross = 10;
-  this.ctx.fillRect(x - lCross, y, 2*lCross, 1);
-  this.ctx.fillRect(x, y - lCross, 1, 2*lCross);
-  this.ctx.fillStyle = "black";
-  this.ctx.fillRect(x, y, 2, 2);
+
+  var lCross = 12;
+  var wCross = 2;
+  if(!this.qspace){
+    this.ctx.fillRect(x - lCross, y - wCross, 2*lCross, 2*wCross);
+    this.ctx.fillRect(x - wCross, y - lCross, 2*wCross, 2*lCross);
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(x, y, 1, 1);
+  }else{
+    //horizontal
+    this.ctx.fillRect(x - lCross, 0.5*this.height - wCross, 2*lCross, 2*wCross);
+    //vertical
+    this.ctx.fillRect(x - wCross, 0, 2*wCross, 2*Math.PI*this.height);
+  }
+
   this.ctx.fill();
   this.ctx.restore();
 }
