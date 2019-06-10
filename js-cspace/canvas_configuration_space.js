@@ -5,6 +5,14 @@ function CanvasConfigurationSpace(canvas)
   this.height = canvas.height;
   this.ctx = canvas.getContext('2d');
   this.valid = false;
+
+  canvas.addEventListener('mousedown', function(e) {
+    var mouse = documentState.getMouse(e);
+    var mx = mouse.x;
+    var my = mouse.y;
+    outputD3.innerHTML = mx;
+    outputD4.innerHTML = my;
+  }, true);
 }
 
 CanvasConfigurationSpace.prototype.update = function(w, h) {

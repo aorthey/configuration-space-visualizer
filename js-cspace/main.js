@@ -70,7 +70,7 @@ function DocumentState(canvas, cspaceCanvas) {
 
   this.dragging = false; // Keep track of when we are dragging
   this.selection = null;
-  this.dragoffx = 0; // See mousedown and mousemove events for explanation
+  this.dragoffx = 0;
   this.dragoffy = 0;
   var myState = this;
   
@@ -180,129 +180,6 @@ DocumentState.prototype.draw = function() {
   }
 }
 
-
-// DocumentState.prototype.CanvasCspaceToConfiguration = function(x,y){
-//   var s = ((x / this.width) * 2*Math.PI) - Math.PI;
-//   var e = ((y / this.height) * 2*Math.PI) - Math.PI;
-//   return{ 
-//     q1: s, 
-//     q2: e
-//   };
-// }
-// DocumentState.prototype.ConfigurationToCanvasCspace = function(q1, q2){
-//   var x = ((Number(q1) + Math.PI)/(2*Math.PI))*this.width;
-//   var y = ((Number(q2) + Math.PI)/(2*Math.PI))*this.height;
-//   return{ 
-//     x: x, 
-//     y: y
-//   };
-// }
-// DocumentState.prototype.drawConfigurationSpace = function() {
-//   var step = 2;
-//   var q1_old = this.robot.q1;
-//   var q2_old = this.robot.q2;
-//   for (var x = 0; x < this.width; x+=step) {
-//     for (var y = 0; y < this.height; y+=step) {
-//       var cspaceCoords = this.CanvasCspaceToConfiguration(x,y);
-//       this.robot.update(cspaceCoords.q1, cspaceCoords.q2);
-
-//       var color = "white";
-
-//       var obstacle = this.obstacles[0];
-//       var block = { x1: obstacle.x, y1: obstacle.y, x2: obstacle.x+obstacle.w, y2: obstacle.y+obstacle.h };
-//       var cCoords = this.robot.CanvasToWorldCoordinates(block.x1, block.y1);
-//       block.x1 = cCoords.x;
-//       block.y1 = cCoords.y;
-//       cCoords = this.robot.CanvasToWorldCoordinates(block.x2, block.y2);
-//       block.x2 = cCoords.x;
-//       block.y2 = cCoords.y;
-
-//       var feasible = hitBlock(this.robot.L2, block) | hitBlock(this.robot.L1, block);
-//       if (feasible) {
-//         color = "lightgray";
-//       }
-
-//       this.ctxCspace.save();
-//       this.ctxCspace.beginPath();
-//       this.ctxCspace.fillStyle = color;
-//       this.ctxCspace.fillRect(x, y, step, step);
-//       this.ctxCspace.fill();
-//       this.ctxCspace.restore();
-//     }
-//   }
-
-//   this.robot.update(q1_old, q2_old);
-
-//   var canvasCoords = this.ConfigurationToCanvasCspace(q1_old, q2_old);
-//   var x = canvasCoords.x;
-//   var y = canvasCoords.y;
-
-//   this.ctxCspace.save();
-//   this.ctxCspace.beginPath();
-//   this.ctxCspace.fillStyle = "red";
-//   var lCross = 10;
-//   this.ctxCspace.fillRect(x - lCross, y, 2*lCross, 1);
-//   this.ctxCspace.fillRect(x, y - lCross, 1, 2*lCross);
-//   this.ctxCspace.fillStyle = "black";
-//   this.ctxCspace.fillRect(x, y, 2, 2);
-//   this.ctxCspace.fill();
-//   this.ctxCspace.restore();
-// }
-// function intersects(a, b, c, d, p, q, r, s) {
-//   var det, gamma, lambda;
-//   det = (c - a) * (s - q) - (r - p) * (d - b);
-//   if (det === 0) {
-//     return false;
-//   } else {
-//     lambda = ((s - q) * (r - a) + (p - r) * (s - b)) / det;
-//     gamma = ((b - d) * (r - a) + (c - a) * (s - b)) / det;
-//     return 0 < lambda && lambda < 1 && (0 < gamma && gamma < 1);
-//   }
-// }
-// function hitBlock(segment, block) {
-//   var bottom = intersects(
-//     segment.x1,
-//     segment.y1,
-//     segment.x2,
-//     segment.y2,
-//     block.x1,
-//     block.y1,
-//     block.x2,
-//     block.y1
-//   );
-//   var top = intersects(
-//     segment.x1,
-//     segment.y1,
-//     segment.x2,
-//     segment.y2,
-//     block.x1,
-//     block.y2,
-//     block.x2,
-//     block.y2
-//   );
-//   var left = intersects(
-//     segment.x1,
-//     segment.y1,
-//     segment.x2,
-//     segment.y2,
-//     block.x1,
-//     block.y1,
-//     block.x1,
-//     block.y2
-//   );
-//   var right = intersects(
-//     segment.x1,
-//     segment.y1,
-//     segment.x2,
-//     segment.y2,
-//     block.x2,
-//     block.y1,
-//     block.x2,
-//     block.y2
-//   );
-//   return bottom | top | left | right;
-// }
-
 DocumentState.prototype.getMouse = function(e) {
   var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
   if (element.offsetParent !== undefined) {
@@ -330,14 +207,13 @@ DocumentState.prototype.windowResizeEvent = function() {
     workspace.width = 0.6*window.innerHeight;
     workspace.height = workspace.width;//0.6*window.innerHeight;
   }
-  // this.canvas_cspace.width = workspace.width;
-  // this.canvas_cspace.height = workspace.height;
-  // cspace.width = workspace.width;
-  // cspace.height = workspace.height;
-  this.canvas_cspace.update(workspace.width, workspace.height);
+  cspace.width = workspace.width;
+  cspace.height = workspace.height;
 
   this.width = workspace.width;
   this.height = workspace.height;
+  this.canvas_cspace.width = workspace.width;
+  this.canvas_cspace.height = workspace.height;
   this.valid = false;
 }
 //var addEvent = function(object, type, callback) {
