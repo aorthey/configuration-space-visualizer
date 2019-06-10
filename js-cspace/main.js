@@ -101,17 +101,15 @@ function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
     // If there was an object selected, we deselect it
     if (myState.selection) {
       myState.selection = null;
-      myState.valid = false; // Need to clear the old selection border
+      myState.valid = false;
     }
   }, true);
   canvas.addEventListener('mousemove', function(e) {
     if (myState.dragging){
       var mouse = myState.getMouse(e);
-      // We don't want to drag the object by its top-left corner, we want to drag it
-      // from where we clicked. Thats why we saved the offset and use it here
       myState.selection.x = mouse.x - myState.dragoffx;
       myState.selection.y = mouse.y - myState.dragoffy;   
-      myState.valid = false; // Something's dragging so we must redraw
+      myState.valid = false;
     }
   }, true);
   canvas.addEventListener('mouseup', function(e) {
@@ -120,11 +118,11 @@ function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
   // double click for making new obstacles
   canvas.addEventListener('dblclick', function(e) {
     var mouse = myState.getMouse(e);
-    myState.addObstacle(new Obstacle(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)'));
+    myState.addObstacle(new Obstacle(mouse.x - 10, mouse.y - 10, 50, 50));
   }, true);
 
-  this.selectionColor = '#CC0000';
-  this.selectionWidth = 3;  
+  this.selectionColor = 'red';
+  this.selectionWidth = 5;  
   this.interval = 30;
   setInterval(function() { myState.draw(); }, myState.interval);
 }
@@ -166,7 +164,7 @@ DocumentState.prototype.draw = function() {
       // We can skip the drawing of elements that have moved off the screen:
       if (obstacle.x > this.width || obstacle.y > this.height ||
           obstacle.x + obstacle.w < 0 || obstacle.y + obstacle.h < 0) continue;
-      obstacles[i].draw(ctx);
+      obstacle.draw(ctx);
     }
     
     // draw selection
