@@ -116,7 +116,7 @@ Robot.prototype.WorldToCanvasCoordinates = function (x, y){
   //[0,1] to [0, workspace.width]
   return {
     x: sx*workspace.width, 
-    y: workspace.height - sy*workspace.height
+    y: sy*workspace.height
   };
 }
 
