@@ -114,6 +114,10 @@ function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
   }, true);
   canvas.addEventListener('mouseup', function(e) {
     myState.dragging = false;
+    if (myState.selection) {
+      myState.selection = null;
+      myState.valid = false;
+    }
   }, true);
   // double click for making new obstacles
   canvas.addEventListener('dblclick', function(e) {

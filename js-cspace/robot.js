@@ -16,8 +16,8 @@ Robot.prototype.update = function(q1, q2) {
   this.L1 = this.arm(0, 0, this.q1, this.l1);
   var q12 = Number(this.q2)+Number(this.q1);
   this.L2 = this.arm(this.L1.x2, this.L1.y2, q12, this.l2);
-  outputRobotPoseQ1.innerHTML = q1;
-  outputRobotPoseQ2.innerHTML = q2;
+  outputRobotPoseQ1.innerHTML = parseFloat(q1).toFixed(2);
+  outputRobotPoseQ2.innerHTML = parseFloat(q2).toFixed(2);
 }
 
 Robot.prototype.draw = function(context) {

@@ -1,6 +1,8 @@
 # Configuration-space Visualizer
 
-Visualize simple configuration spaces and workspaces
+Visualize simple configuration spaces and workspaces.
+
+JavaScript can be found [here](https://aorthey.github.io/configuration-space-visualizer/js-cspace/)
 
 ## 2dof Manipulator in the Plane
 
