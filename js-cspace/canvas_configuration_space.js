@@ -19,6 +19,7 @@ function CanvasConfigurationSpace(canvas)
   this.htmlTop = html.offsetTop;
   this.htmlLeft = html.offsetLeft;
   var myState = this;
+  this.dragging = false;
   canvas.addEventListener('mousedown', function(e) {
     var mouse = myState.getMouse(e);
     var mx = mouse.x;
@@ -29,9 +30,26 @@ function CanvasConfigurationSpace(canvas)
     }else{
       myState.robot.update(cspaceCoords.q1, cspaceCoords.q2);
     }
-
     documentState.valid = false;
-    documentState.draw();
+    myState.dragging = true;
+  }, true);
+
+  canvas.addEventListener('mousemove', function(e) {
+    if (myState.dragging){
+      var mouse = myState.getMouse(e);
+      var mx = mouse.x;
+      var my = mouse.y;
+      documentState.valid = false;
+      var cspaceCoords = myState.CanvasCspaceToConfiguration(mx, my);
+      if(myState.qspace){
+        myState.robot.update(cspaceCoords.q1, myState.robot.q2);
+      }else{
+        myState.robot.update(cspaceCoords.q1, cspaceCoords.q2);
+      }
+    }
+  }, true);
+  canvas.addEventListener('mouseup', function(e) {
+    myState.dragging = false;
   }, true);
 }
 
