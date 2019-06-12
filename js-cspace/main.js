@@ -40,15 +40,16 @@ function CreateSlider(name, min, max, step, value){
 //*****************************************************************************
 //documentState
 //*****************************************************************************
-function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
+function DocumentState(canvas, cspace1, cspace2, qspace1, qspace2) {
   this.canvas = canvas;
   this.width = canvas.width;
   this.height = canvas.height;
   this.ctx = canvas.getContext('2d');
   this.ctx.imageSmoothingEnabled = true;
 
-  this.canvas_cspace = new CanvasConfigurationSpace(cspaceCanvas);
-  this.canvas_qspace = new CanvasConfigurationSpace(qspaceCanvas);
+  this.canvas_cspace = new CanvasConfigurationSpaceLayered(cspace1, cspace2);
+  this.canvas_qspace = new CanvasConfigurationSpaceLayered(qspace1, qspace2);
+  // this.canvas_qspace = new CanvasConfigurationSpace(qspaceCanvas);
   this.canvas_qspace.qspace = true;
 
   var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
@@ -110,6 +111,8 @@ function DocumentState(canvas, cspaceCanvas, qspaceCanvas) {
       myState.selection.x = mouse.x - myState.dragoffx;
       myState.selection.y = mouse.y - myState.dragoffy;   
       myState.valid = false;
+      myState.canvas_cspace.valid = false;
+      myState.canvas_qspace.valid = false;
     }
   }, true);
   canvas.addEventListener('mouseup', function(e) {
@@ -144,12 +147,11 @@ var addEvent = function(object, type, callback) {
 DocumentState.prototype.addObstacle = function(o) {
   this.obstacles.push(o);
   this.valid = false;
+  this.canvas_cspace.valid = false;
 }
 
 DocumentState.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
-  this.canvas_cspace.clear();
-  this.canvas_qspace.clear();
 }
 
 DocumentState.prototype.draw = function() {
@@ -215,10 +217,14 @@ DocumentState.prototype.windowResizeEvent = function() {
     workspace.width = 0.6*window.innerHeight;
     workspace.height = workspace.width;//0.6*window.innerHeight;
   }
-  cspace.width = workspace.width;
-  cspace.height = workspace.height;
-  qspace.width = workspace.width;
-  qspace.height = workspace.height;
+  cspace1.width = workspace.width;
+  cspace1.height = workspace.height;
+  cspace2.width = workspace.width;
+  cspace2.height = workspace.height;
+  qspace1.width = workspace.width;
+  qspace1.height = workspace.height;
+  qspace2.width = workspace.width;
+  qspace2.height = workspace.height;
 
   this.width = workspace.width;
   this.height = workspace.height;
@@ -227,6 +233,8 @@ DocumentState.prototype.windowResizeEvent = function() {
   this.canvas_qspace.width = workspace.width;
   this.canvas_qspace.height = workspace.height;
   this.valid = false;
+  this.canvas_qspace.valid = false;
+  this.canvas_cspace.valid = false;
 }
 //var addEvent = function(object, type, callback) {
 DocumentState.prototype.addEvent = function(object, type, callback) {
@@ -247,11 +255,13 @@ function init(){
   linkWidth = 10;
   fillColor = "#AAAAAA";
 
-  cspace = document.getElementById("configuration-space");
-  qspace = document.getElementById("quotient-space");
+  cspace1 = document.getElementById("cspace1");
+  cspace2 = document.getElementById("cspace2");
+  qspace1 = document.getElementById("qspace1");
+  qspace2 = document.getElementById("qspace2");
   workspace = document.getElementById("workspace");
 
-  documentState = new DocumentState(workspace, cspace, qspace);
+  documentState = new DocumentState(workspace, cspace1, cspace2, qspace1, qspace2);
   outputD1 = document.getElementById("wSize");
   outputD2 = document.getElementById("hSize");
   outputD3 = document.getElementById("posCircleWorld");

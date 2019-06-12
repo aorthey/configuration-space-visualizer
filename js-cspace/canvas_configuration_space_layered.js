@@ -1,26 +1,28 @@
-function CanvasConfigurationSpace(canvas)
+function CanvasConfigurationSpaceLayered(canvas1, canvas2)
 {
-  this.canvas = canvas;
-  this.width = canvas.width;
-  this.height = canvas.height;
-  this.ctx = canvas.getContext('2d');
+  this.canvas = canvas2;
+  this.background = canvas1;
+  this.width = this.canvas.width;
+  this.height = this.canvas.height;
+  this.ctx = this.canvas.getContext('2d');
+  this.ctx_background = this.background.getContext('2d');
   this.valid = false;
   this.qspace = false;
-  this.resolution_step = 5; //higher => faster but coarser image
+  this.resolution_step = 2; //higher => faster but coarser image
 
   // var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
   if (document.defaultView && document.defaultView.getComputedStyle) {
-    this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingLeft'], 10)      || 0;
-    this.stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingTop'], 10)       || 0;
-    this.styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderLeftWidth'], 10)  || 0;
-    this.styleBorderTop   = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderTopWidth'], 10)   || 0;
+    this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingLeft'], 10)      || 0;
+    this.stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingTop'], 10)       || 0;
+    this.styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderLeftWidth'], 10)  || 0;
+    this.styleBorderTop   = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderTopWidth'], 10)   || 0;
   }
   var html = document.body.parentNode;
   this.htmlTop = html.offsetTop;
   this.htmlLeft = html.offsetLeft;
   var myState = this;
   this.dragging = false;
-  canvas.addEventListener('mousedown', function(e) {
+  this.canvas.addEventListener('mousedown', function(e) {
     var mouse = myState.getMouse(e);
     var mx = mouse.x;
     var my = mouse.y;
@@ -34,7 +36,7 @@ function CanvasConfigurationSpace(canvas)
     myState.dragging = true;
   }, true);
 
-  canvas.addEventListener('mousemove', function(e) {
+  this.canvas.addEventListener('mousemove', function(e) {
     if (myState.dragging){
       var mouse = myState.getMouse(e);
       var mx = mouse.x;
@@ -48,12 +50,12 @@ function CanvasConfigurationSpace(canvas)
       }
     }
   }, true);
-  canvas.addEventListener('mouseup', function(e) {
+  this.canvas.addEventListener('mouseup', function(e) {
     myState.dragging = false;
   }, true);
 }
 
-CanvasConfigurationSpace.prototype.getMouse = function(e) {
+CanvasConfigurationSpaceLayered.prototype.getMouse = function(e) {
   var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
   if (element.offsetParent !== undefined) {
     do {
@@ -68,18 +70,21 @@ CanvasConfigurationSpace.prototype.getMouse = function(e) {
   return {x: mx, y: my};
 }
 
-CanvasConfigurationSpace.prototype.update = function(w, h) {
+CanvasConfigurationSpaceLayered.prototype.update = function(w, h) {
   this.canvas.width = w;
   this.canvas.height = h;
-  this.width = canvas.width;
-  this.height = canvas.height;
+  this.width = this.canvas.width;
+  this.height = this.canvas.height;
   this.valid = false;
 }
 
-CanvasConfigurationSpace.prototype.clear = function() {
+CanvasConfigurationSpaceLayered.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
+  this.ctx_background.clearRect(0, 0, this.width, this.height);
+  console.log("clear layered");
+
 }
-CanvasConfigurationSpace.prototype.CanvasCspaceToConfiguration = function(x,y){
+CanvasConfigurationSpaceLayered.prototype.CanvasCspaceToConfiguration = function(x,y){
   var q1 = ((x / this.width) * 2*Math.PI) - Math.PI;
   var q2 = (((y / this.height) * 2*Math.PI) - Math.PI);
   return{ 
@@ -87,7 +92,7 @@ CanvasConfigurationSpace.prototype.CanvasCspaceToConfiguration = function(x,y){
     q2: q2
   };
 }
-CanvasConfigurationSpace.prototype.ConfigurationToCanvasCspace = function(q1, q2){
+CanvasConfigurationSpaceLayered.prototype.ConfigurationToCanvasCspace = function(q1, q2){
   var x = ((Number(q1) + Math.PI)/(2*Math.PI))*this.width;
   var y = ((Number(q2) + Math.PI)/(2*Math.PI))*this.height;
   return{ 
@@ -150,14 +155,15 @@ function hitBlock(segment, block) {
   return bottom | top | left | right;
 }
 
-CanvasConfigurationSpace.prototype.drawLabels = function() {
+CanvasConfigurationSpaceLayered.prototype.drawLabels = function() {
 
 }
 
-CanvasConfigurationSpace.prototype.draw = function() {
+CanvasConfigurationSpaceLayered.prototype.draw = function() {
 
-  if(true){
+  if(!this.valid){
     this.clear();
+    console.log("redraw layered");
     var q1_old = this.robot.q1;
     var q2_old = this.robot.q2;
     for (var x = 0; x < this.width; x+=this.resolution_step) {
@@ -186,12 +192,12 @@ CanvasConfigurationSpace.prototype.draw = function() {
             color = "lightgray";
           }
 
-          this.ctx.save();
-          this.ctx.beginPath();
-          this.ctx.fillStyle = color;
-          this.ctx.fillRect(x, y, this.resolution_step, this.resolution_step);
-          this.ctx.fill();
-          this.ctx.restore();
+          this.ctx_background.save();
+          this.ctx_background.beginPath();
+          this.ctx_background.fillStyle = color;
+          this.ctx_background.fillRect(x, y, this.resolution_step, this.resolution_step);
+          this.ctx_background.fill();
+          this.ctx_background.restore();
         }
       }
     }
@@ -199,12 +205,14 @@ CanvasConfigurationSpace.prototype.draw = function() {
     this.robot.update(q1_old, q2_old);
   }
 
+  console.log("redraw cross");
   var canvasCoords = this.ConfigurationToCanvasCspace(this.robot.q1, this.robot.q2);
   var x = canvasCoords.x;
   var y = canvasCoords.y;
   outputD3.innerHTML = x;
   outputD4.innerHTML = y;
 
+  this.ctx.clearRect(0, 0, this.width, this.height);
   this.ctx.save();
   this.drawLabels();
   this.ctx.beginPath();
