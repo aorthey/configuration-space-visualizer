@@ -286,15 +286,13 @@ def plotSamplesOneDim(fname, dim1=0, maxElements = float('inf')):
 def PlotSamples(fname, dim1=4, dim2=5, maxElements=float('inf')):
   Q = np.array(getPoints(fname))
   feasible = np.array(Q[:,0]).astype(bool)
-  print(feasible)
+  notFeasible = ~feasible
 
   t1 = Q[np.where(feasible),dim1].flatten()
   t2 = Q[np.where(feasible),dim2].flatten()
   t1 = t1.astype(float)
   t2 = t2.astype(float)
 
-  notFeasible = ~feasible
-  print(notFeasible)
   t3 = Q[np.where(notFeasible),dim1].flatten()
   t4 = Q[np.where(notFeasible),dim2].flatten()
   t3 = t3.astype(float)
@@ -304,3 +302,34 @@ def PlotSamples(fname, dim1=4, dim2=5, maxElements=float('inf')):
   plt.scatter(t3,t4, marker='o', color='red')
   plt.show()
 
+def PlotSamples3D(fname, dim1=4, dim2=5, dim3=6, maxElements=float('inf')):
+  Q = np.array(getPoints(fname))
+  feasible = np.array(Q[:,0]).astype(bool)
+  notFeasible = ~feasible
+
+  t1 = Q[np.where(feasible),dim1].flatten()
+  t2 = Q[np.where(feasible),dim2].flatten()
+  t3 = Q[np.where(feasible),dim3].flatten()
+  t1 = t1.astype(float)
+  t2 = t2.astype(float)
+  t3 = t3.astype(float)
+
+  t4 = Q[np.where(notFeasible),dim1].flatten()
+  t5 = Q[np.where(notFeasible),dim2].flatten()
+  t6 = Q[np.where(notFeasible),dim3].flatten()
+  t4 = t4.astype(float)
+  t5 = t5.astype(float)
+  t6 = t6.astype(float)
+
+  print(t3)
+
+  fig = plt.figure()
+  ax = fig.add_subplot(111, projection='3d')
+
+  ax.scatter(t1, t2, t3, marker='x', color='green')
+
+  ax.set_xlabel('X')
+  ax.set_ylabel('Y')
+  ax.set_zlabel(r'$\theta$')
+  # plt.scatter(t4, t5, t6, marker='o', color='red')
+  plt.show()

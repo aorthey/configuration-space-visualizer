@@ -1,0 +1,570 @@
+<?xml version="1.0" ?>
+<path_piecewise_linear>
+    <length>7.37629</length>
+    <number_of_milestones>129</number_of_milestones>
+    <!--Interlength: Length between States-->
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0886013</interlength>
+    <interlength>0.0494851</interlength>
+    <interlength>0.0494421</interlength>
+    <interlength>0.0493561</interlength>
+    <interlength>0.049227</interlength>
+    <interlength>0.0490549</interlength>
+    <interlength>0.0488398</interlength>
+    <interlength>0.0485817</interlength>
+    <interlength>0.0482806</interlength>
+    <interlength>0.0479364</interlength>
+    <interlength>0.0475493</interlength>
+    <interlength>0.0471191</interlength>
+    <interlength>0.0466459</interlength>
+    <interlength>0.0461297</interlength>
+    <interlength>0.0455704</interlength>
+    <interlength>0.0449682</interlength>
+    <interlength>0.0443229</interlength>
+    <interlength>0.0436346</interlength>
+    <interlength>0.0429033</interlength>
+    <interlength>0.0421289</interlength>
+    <interlength>0.0413116</interlength>
+    <interlength>0.0404512</interlength>
+    <interlength>0.0395478</interlength>
+    <interlength>0.0386014</interlength>
+    <interlength>0.037612</interlength>
+    <interlength>0.0365796</interlength>
+    <interlength>0.0355041</interlength>
+    <interlength>0.0343856</interlength>
+    <interlength>0.0332241</interlength>
+    <interlength>0.0320196</interlength>
+    <interlength>0.0307721</interlength>
+    <interlength>0.0294816</interlength>
+    <interlength>0.028148</interlength>
+    <interlength>0.0267715</interlength>
+    <interlength>0.025481</interlength>
+    <interlength>0.0242765</interlength>
+    <interlength>0.023158</interlength>
+    <interlength>0.0221256</interlength>
+    <interlength>0.0211793</interlength>
+    <interlength>0.0203189</interlength>
+    <interlength>0.0195446</interlength>
+    <interlength>0.0188564</interlength>
+    <interlength>0.0180821</interlength>
+    <interlength>0.0172218</interlength>
+    <interlength>0.0162755</interlength>
+    <interlength>0.0152431</interlength>
+    <interlength>0.0141248</interlength>
+    <interlength>0.0129204</interlength>
+    <interlength>0.0116301</interlength>
+    <interlength>0.0102538</interlength>
+    <interlength>0.00922162</interlength>
+    <interlength>0.00853356</interlength>
+    <interlength>0.00750154</interlength>
+    <interlength>0.00612575</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.00543801</interlength>
+    <interlength>0.0256606</interlength>
+    <interlength>0.0358701</interlength>
+    <interlength>0.0563148</interlength>
+    <interlength>0.0716568</interlength>
+    <interlength>0.0818866</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <interlength>0.0870019</interlength>
+    <!--Smoothed States: Sequence of Configurations in Configuration Space-->
+    <state>3  -2 0 0 </state>
+    <state>3  -1.95791 -0.0177922 -0.0858143 </state>
+    <state>3  -1.91582 -0.0355845 -0.171629 </state>
+    <state>3  -1.87374 -0.0533767 -0.257443 </state>
+    <state>3  -1.83165 -0.071169 -0.343257 </state>
+    <state>3  -1.78956 -0.0889612 -0.429071 </state>
+    <state>3  -1.74747 -0.106753 -0.514886 </state>
+    <state>3  -1.70538 -0.124546 -0.6007 </state>
+    <state>3  -1.6633 -0.142338 -0.686514 </state>
+    <state>3  -1.62121 -0.16013 -0.772328 </state>
+    <state>3  -1.57912 -0.177922 -0.858143 </state>
+    <state>3  -1.53703 -0.195715 -0.943957 </state>
+    <state>3  -1.49495 -0.213507 -1.02977 </state>
+    <state>3  -1.45286 -0.231299 -1.11559 </state>
+    <state>3  -1.41077 -0.249091 -1.2014 </state>
+    <state>3  -1.36868 -0.266884 -1.28721 </state>
+    <state>3  -1.32659 -0.284676 -1.37303 </state>
+    <state>3  -1.28451 -0.302468 -1.45884 </state>
+    <state>3  -1.24242 -0.32026 -1.54466 </state>
+    <state>3  -1.20033 -0.338053 -1.63047 </state>
+    <state>3  -1.15824 -0.355845 -1.71629 </state>
+    <state>3  -1.11615 -0.373637 -1.8021 </state>
+    <state>3  -1.07407 -0.391429 -1.88791 </state>
+    <state>3  -1.03198 -0.409222 -1.97373 </state>
+    <state>3  -0.98989 -0.427014 -2.05954 </state>
+    <state>3  -0.947803 -0.444806 -2.14536 </state>
+    <state>3  -0.905715 -0.462598 -2.23117 </state>
+    <state>3  -0.863627 -0.48039 -2.31698 </state>
+    <state>3  -0.821539 -0.498183 -2.4028 </state>
+    <state>3  -0.779451 -0.515975 -2.48861 </state>
+    <state>3  -0.737363 -0.533767 -2.57443 </state>
+    <state>3  -0.695275 -0.551559 -2.66024 </state>
+    <state>3  -0.653187 -0.569352 -2.74606 </state>
+    <state>3  -0.616555 -0.569846 -2.77175 </state>
+    <state>3  -0.579954 -0.57034 -2.79743 </state>
+    <state>3  -0.543417 -0.570833 -2.82306 </state>
+    <state>3  -0.506975 -0.571324 -2.84863 </state>
+    <state>3  -0.470661 -0.571812 -2.8741 </state>
+    <state>3  -0.434506 -0.572298 -2.89946 </state>
+    <state>3  -0.398541 -0.572779 -2.92469 </state>
+    <state>3  -0.3628 -0.573257 -2.94976 </state>
+    <state>3  -0.327312 -0.57373 -2.97466 </state>
+    <state>3  -0.292112 -0.574197 -2.99935 </state>
+    <state>3  -0.257229 -0.574658 -3.02381 </state>
+    <state>3  -0.222696 -0.575113 -3.04803 </state>
+    <state>3  -0.188545 -0.57556 -3.07198 </state>
+    <state>3  -0.154808 -0.576 -3.09564 </state>
+    <state>3  -0.121515 -0.57643 -3.11899 </state>
+    <state>3  -0.0887007 -0.576852 3.14118 </state>
+    <state>3  -0.0563948 -0.577265 3.11853 </state>
+    <state>3  -0.0246298 -0.577666 3.09626 </state>
+    <state>3  0.00656249 -0.578057 3.07439 </state>
+    <state>3  0.0371504 -0.578437 3.05295 </state>
+    <state>3  0.067102 -0.578804 3.03195 </state>
+    <state>3  0.0963855 -0.579159 3.01143 </state>
+    <state>3  0.124969 -0.5795 2.9914 </state>
+    <state>3  0.152821 -0.579827 2.97188 </state>
+    <state>3  0.179909 -0.58014 2.9529 </state>
+    <state>3  0.206202 -0.580438 2.93448 </state>
+    <state>3  0.231668 -0.58072 2.91665 </state>
+    <state>3  0.256275 -0.580986 2.89942 </state>
+    <state>3  0.279991 -0.581234 2.88281 </state>
+    <state>3  0.302785 -0.581465 2.86686 </state>
+    <state>3  0.324624 -0.581678 2.85157 </state>
+    <state>3  0.345477 -0.581872 2.83698 </state>
+    <state>3  0.365311 -0.582047 2.82311 </state>
+    <state>3  0.384192 -0.582204 2.80991 </state>
+    <state>3  0.402181 -0.582343 2.79734 </state>
+    <state>3  0.419344 -0.582467 2.78535 </state>
+    <state>3  0.435743 -0.582577 2.7739 </state>
+    <state>3  0.451442 -0.582673 2.76294 </state>
+    <state>3  0.466505 -0.582757 2.75243 </state>
+    <state>3  0.480995 -0.58283 2.74232 </state>
+    <state>3  0.494976 -0.582893 2.73257 </state>
+    <state>3  0.508384 -0.582945 2.72322 </state>
+    <state>3  0.521156 -0.582986 2.71432 </state>
+    <state>3  0.533228 -0.583013 2.70591 </state>
+    <state>3  0.544537 -0.583025 2.69805 </state>
+    <state>3  0.555019 -0.583022 2.69076 </state>
+    <state>3  0.56461 -0.583002 2.6841 </state>
+    <state>3  0.573246 -0.582963 2.67811 </state>
+    <state>3  0.580864 -0.582906 2.67284 </state>
+    <state>3  0.587719 -0.582833 2.66811 </state>
+    <state>3  0.594065 -0.582751 2.66373 </state>
+    <state>3  0.599647 -0.582655 2.6599 </state>
+    <state>3  0.604211 -0.582539 2.65678 </state>
+    <state>3  0.608266 -0.582413 2.65402 </state>
+    <state>3  0.612321 -0.582288 2.65125 </state>
+    <state>3  0.616377 -0.582162 2.64849 </state>
+    <state>3  0.620432 -0.582036 2.64573 </state>
+    <state>3  0.624487 -0.581911 2.64297 </state>
+    <state>3  0.628542 -0.581785 2.64021 </state>
+    <state>3  0.632597 -0.581659 2.63744 </state>
+    <state>3  0.636652 -0.581534 2.63468 </state>
+    <state>3  0.640708 -0.581408 2.63192 </state>
+    <state>3  0.654305 -0.576774 2.60933 </state>
+    <state>3  0.672674 -0.569885 2.57683 </state>
+    <state>3  0.700585 -0.558487 2.52449 </state>
+    <state>3  0.735652 -0.543707 2.45729 </state>
+    <state>3  0.775491 -0.526674 2.38017 </state>
+    <state>3  0.817716 -0.508512 2.2981 </state>
+    <state>3  0.85994 -0.490351 2.21602 </state>
+    <state>3  0.902165 -0.47219 2.13395 </state>
+    <state>3  0.944389 -0.454029 2.05187 </state>
+    <state>3  0.986613 -0.435868 1.9698 </state>
+    <state>3  1.02884 -0.417707 1.88772 </state>
+    <state>3  1.07106 -0.399545 1.80565 </state>
+    <state>3  1.11329 -0.381384 1.72357 </state>
+    <state>3  1.15551 -0.363223 1.6415 </state>
+    <state>3  1.19774 -0.345062 1.55942 </state>
+    <state>3  1.23996 -0.326901 1.47735 </state>
+    <state>3  1.28218 -0.30874 1.39527 </state>
+    <state>3  1.32441 -0.290578 1.3132 </state>
+    <state>3  1.36663 -0.272417 1.23112 </state>
+    <state>3  1.40886 -0.254256 1.14905 </state>
+    <state>3  1.45108 -0.236095 1.06697 </state>
+    <state>3  1.49331 -0.217934 0.984899 </state>
+    <state>3  1.53553 -0.199773 0.902824 </state>
+    <state>3  1.57776 -0.181612 0.820749 </state>
+    <state>3  1.61998 -0.16345 0.738674 </state>
+    <state>3  1.6622 -0.145289 0.656599 </state>
+    <state>3  1.70443 -0.127128 0.574524 </state>
+    <state>3  1.74665 -0.108967 0.492449 </state>
+    <state>3  1.78888 -0.0908058 0.410375 </state>
+    <state>3  1.8311 -0.0726446 0.3283 </state>
+    <state>3  1.87333 -0.0544835 0.246225 </state>
+    <state>3  1.91555 -0.0363223 0.16415 </state>
+    <state>3  1.95778 -0.0181612 0.0820749 </state>
+    <state>3  2 -0 0 </state>
+    <!--Raw States: Unsmoothed-->
+    <rawstate>3  -2 0 0 </rawstate>
+    <rawstate>3  -1.9653 -0.00165358 -0.0308783 </rawstate>
+    <rawstate>3  -1.93061 -0.00330716 -0.0617566 </rawstate>
+    <rawstate>3  -1.89591 -0.00496074 -0.092635 </rawstate>
+    <rawstate>3  -1.86121 -0.00661432 -0.123513 </rawstate>
+    <rawstate>3  -1.82651 -0.0082679 -0.154392 </rawstate>
+    <rawstate>3  -1.79182 -0.00992149 -0.18527 </rawstate>
+    <rawstate>3  -1.75712 -0.0115751 -0.216148 </rawstate>
+    <rawstate>3  -1.72242 -0.0132286 -0.247027 </rawstate>
+    <rawstate>3  -1.68773 -0.0148822 -0.277905 </rawstate>
+    <rawstate>3  -1.65303 -0.0165358 -0.308783 </rawstate>
+    <rawstate>3  -1.61833 -0.0181894 -0.339661 </rawstate>
+    <rawstate>3  -1.58363 -0.019843 -0.37054 </rawstate>
+    <rawstate>3  -1.54894 -0.0214966 -0.401418 </rawstate>
+    <rawstate>3  -1.51424 -0.0231501 -0.432296 </rawstate>
+    <rawstate>3  -1.47954 -0.0248037 -0.463175 </rawstate>
+    <rawstate>3  -1.44484 -0.0264573 -0.494053 </rawstate>
+    <rawstate>3  -1.41015 -0.0281109 -0.524931 </rawstate>
+    <rawstate>3  -1.37545 -0.0297645 -0.55581 </rawstate>
+    <rawstate>3  -1.34075 -0.031418 -0.586688 </rawstate>
+    <rawstate>3  -1.30606 -0.0330716 -0.617566 </rawstate>
+    <rawstate>3  -1.27136 -0.0347252 -0.648445 </rawstate>
+    <rawstate>3  -1.23666 -0.0363788 -0.679323 </rawstate>
+    <rawstate>3  -1.20196 -0.0380324 -0.710201 </rawstate>
+    <rawstate>3  -1.16727 -0.0396859 -0.74108 </rawstate>
+    <rawstate>3  -1.13257 -0.0413395 -0.771958 </rawstate>
+    <rawstate>3  -1.09787 -0.0429931 -0.802836 </rawstate>
+    <rawstate>3  -1.06318 -0.0446467 -0.833715 </rawstate>
+    <rawstate>3  -1.02848 -0.0463003 -0.864593 </rawstate>
+    <rawstate>3  -0.993781 -0.0479538 -0.895471 </rawstate>
+    <rawstate>3  -0.959083 -0.0496074 -0.92635 </rawstate>
+    <rawstate>3  -0.924386 -0.051261 -0.957228 </rawstate>
+    <rawstate>3  -0.889689 -0.0529146 -0.988106 </rawstate>
+    <rawstate>3  -0.854992 -0.0545682 -1.01898 </rawstate>
+    <rawstate>3  -0.857163 -0.0465272 -1.05032 </rawstate>
+    <rawstate>3  -0.859333 -0.0384861 -1.08166 </rawstate>
+    <rawstate>3  -0.861504 -0.0304451 -1.11299 </rawstate>
+    <rawstate>3  -0.863675 -0.0224041 -1.14433 </rawstate>
+    <rawstate>3  -0.865846 -0.0143631 -1.17567 </rawstate>
+    <rawstate>3  -0.868017 -0.00632209 -1.207 </rawstate>
+    <rawstate>3  -0.870188 0.00171892 -1.23834 </rawstate>
+    <rawstate>3  -0.872359 0.00975993 -1.26968 </rawstate>
+    <rawstate>3  -0.874529 0.0178009 -1.30101 </rawstate>
+    <rawstate>3  -0.8767 0.025842 -1.33235 </rawstate>
+    <rawstate>3  -0.878871 0.033883 -1.36369 </rawstate>
+    <rawstate>3  -0.881042 0.041924 -1.39502 </rawstate>
+    <rawstate>3  -0.883213 0.049965 -1.42636 </rawstate>
+    <rawstate>3  -0.885384 0.058006 -1.45769 </rawstate>
+    <rawstate>3  -0.887555 0.066047 -1.48903 </rawstate>
+    <rawstate>3  -0.889725 0.074088 -1.52037 </rawstate>
+    <rawstate>3  -0.891896 0.082129 -1.5517 </rawstate>
+    <rawstate>3  -0.894067 0.0901701 -1.58304 </rawstate>
+    <rawstate>3  -0.896238 0.0982111 -1.61438 </rawstate>
+    <rawstate>3  -0.898409 0.106252 -1.64571 </rawstate>
+    <rawstate>3  -0.90058 0.114293 -1.67705 </rawstate>
+    <rawstate>3  -0.902751 0.122334 -1.70839 </rawstate>
+    <rawstate>3  -0.904921 0.130375 -1.73972 </rawstate>
+    <rawstate>3  -0.907092 0.138416 -1.77106 </rawstate>
+    <rawstate>3  -0.909263 0.146457 -1.80239 </rawstate>
+    <rawstate>3  -0.911434 0.154498 -1.83373 </rawstate>
+    <rawstate>3  -0.913605 0.162539 -1.86507 </rawstate>
+    <rawstate>3  -0.915776 0.17058 -1.8964 </rawstate>
+    <rawstate>3  -0.917947 0.178621 -1.92774 </rawstate>
+    <rawstate>3  -0.920117 0.186662 -1.95908 </rawstate>
+    <rawstate>3  -0.922288 0.194703 -1.99041 </rawstate>
+    <rawstate>3  -0.924459 0.202744 -2.02175 </rawstate>
+    <rawstate>3  -0.92663 0.210785 -2.05309 </rawstate>
+    <rawstate>3  -0.928801 0.218826 -2.08442 </rawstate>
+    <rawstate>3  -0.930972 0.226867 -2.11576 </rawstate>
+    <rawstate>3  -0.933143 0.234908 -2.1471 </rawstate>
+    <rawstate>3  -0.935313 0.242949 -2.17843 </rawstate>
+    <rawstate>3  -0.937484 0.25099 -2.20977 </rawstate>
+    <rawstate>3  -0.939655 0.259031 -2.2411 </rawstate>
+    <rawstate>3  -0.941826 0.267072 -2.27244 </rawstate>
+    <rawstate>3  -0.943997 0.275113 -2.30378 </rawstate>
+    <rawstate>3  -0.946168 0.283154 -2.33511 </rawstate>
+    <rawstate>3  -0.948339 0.291195 -2.36645 </rawstate>
+    <rawstate>3  -0.950509 0.299236 -2.39779 </rawstate>
+    <rawstate>3  -0.95268 0.307277 -2.42912 </rawstate>
+    <rawstate>3  -0.954851 0.315318 -2.46046 </rawstate>
+    <rawstate>3  -0.957022 0.323359 -2.4918 </rawstate>
+    <rawstate>3  -0.959193 0.3314 -2.52313 </rawstate>
+    <rawstate>3  -0.961364 0.339441 -2.55447 </rawstate>
+    <rawstate>3  -0.963535 0.347482 -2.58581 </rawstate>
+    <rawstate>3  -0.965705 0.355523 -2.61714 </rawstate>
+    <rawstate>3  -0.967876 0.363564 -2.64848 </rawstate>
+    <rawstate>3  -0.970047 0.371605 -2.67981 </rawstate>
+    <rawstate>3  -0.972218 0.379646 -2.71115 </rawstate>
+    <rawstate>3  -0.974389 0.387688 -2.74249 </rawstate>
+    <rawstate>3  -0.97656 0.395729 -2.77382 </rawstate>
+    <rawstate>3  -0.978731 0.40377 -2.80516 </rawstate>
+    <rawstate>3  -0.980901 0.411811 -2.8365 </rawstate>
+    <rawstate>3  -0.983072 0.419852 -2.86783 </rawstate>
+    <rawstate>3  -0.985243 0.427893 -2.89917 </rawstate>
+    <rawstate>3  -0.987414 0.435934 -2.93051 </rawstate>
+    <rawstate>3  -0.989585 0.443975 -2.96184 </rawstate>
+    <rawstate>3  -0.991756 0.452016 -2.99318 </rawstate>
+    <rawstate>3  -0.993927 0.460057 -3.02451 </rawstate>
+    <rawstate>3  -0.996097 0.468098 -3.05585 </rawstate>
+    <rawstate>3  -0.998268 0.476139 -3.08719 </rawstate>
+    <rawstate>3  -1.00044 0.48418 -3.11852 </rawstate>
+    <rawstate>3  -1.00261 0.492221 3.13332 </rawstate>
+    <rawstate>3  -1.00478 0.500262 3.10199 </rawstate>
+    <rawstate>3  -1.00544 0.461888 3.07202 </rawstate>
+    <rawstate>3  -1.00611 0.423514 3.04205 </rawstate>
+    <rawstate>3  -1.00677 0.385141 3.01208 </rawstate>
+    <rawstate>3  -1.00743 0.346767 2.98212 </rawstate>
+    <rawstate>3  -1.0081 0.308394 2.95215 </rawstate>
+    <rawstate>3  -1.00876 0.27002 2.92218 </rawstate>
+    <rawstate>3  -1.00942 0.231646 2.89221 </rawstate>
+    <rawstate>3  -1.01008 0.193273 2.86224 </rawstate>
+    <rawstate>3  -1.01075 0.154899 2.83228 </rawstate>
+    <rawstate>3  -1.01141 0.116526 2.80231 </rawstate>
+    <rawstate>3  -1.01207 0.078152 2.77234 </rawstate>
+    <rawstate>3  -1.01274 0.0397784 2.74237 </rawstate>
+    <rawstate>3  -1.0134 0.00140474 2.7124 </rawstate>
+    <rawstate>3  -1.01406 -0.0369689 2.68244 </rawstate>
+    <rawstate>3  -1.01473 -0.0753425 2.65247 </rawstate>
+    <rawstate>3  -1.01539 -0.113716 2.6225 </rawstate>
+    <rawstate>3  -1.01605 -0.15209 2.59253 </rawstate>
+    <rawstate>3  -1.01671 -0.190463 2.56256 </rawstate>
+    <rawstate>3  -1.01738 -0.228837 2.53259 </rawstate>
+    <rawstate>3  -1.02532 -0.256118 2.56245 </rawstate>
+    <rawstate>3  -1.03327 -0.283399 2.5923 </rawstate>
+    <rawstate>3  -1.04121 -0.31068 2.62215 </rawstate>
+    <rawstate>3  -1.04916 -0.337961 2.652 </rawstate>
+    <rawstate>3  -1.0571 -0.365242 2.68186 </rawstate>
+    <rawstate>3  -1.06505 -0.392522 2.71171 </rawstate>
+    <rawstate>3  -1.07299 -0.419803 2.74156 </rawstate>
+    <rawstate>3  -1.08094 -0.447084 2.77141 </rawstate>
+    <rawstate>3  -1.08888 -0.474365 2.80127 </rawstate>
+    <rawstate>3  -1.09683 -0.501646 2.83112 </rawstate>
+    <rawstate>3  -1.10477 -0.528927 2.86097 </rawstate>
+    <rawstate>3  -1.11272 -0.556208 2.89083 </rawstate>
+    <rawstate>3  -1.12066 -0.583489 2.92068 </rawstate>
+    <rawstate>3  -1.12861 -0.61077 2.95053 </rawstate>
+    <rawstate>3  -1.13655 -0.638051 2.98038 </rawstate>
+    <rawstate>3  -1.07106 -0.638789 2.98738 </rawstate>
+    <rawstate>3  -1.00557 -0.639528 2.99437 </rawstate>
+    <rawstate>3  -0.940084 -0.640266 3.00137 </rawstate>
+    <rawstate>3  -0.874594 -0.641005 3.00836 </rawstate>
+    <rawstate>3  -0.809104 -0.641743 3.01536 </rawstate>
+    <rawstate>3  -0.743614 -0.642482 3.02236 </rawstate>
+    <rawstate>3  -0.678125 -0.643221 3.02935 </rawstate>
+    <rawstate>3  -0.612635 -0.643959 3.03635 </rawstate>
+    <rawstate>3  -0.547145 -0.644698 3.04334 </rawstate>
+    <rawstate>3  -0.481655 -0.645436 3.05034 </rawstate>
+    <rawstate>3  -0.416166 -0.646175 3.05733 </rawstate>
+    <rawstate>3  -0.350676 -0.646913 3.06433 </rawstate>
+    <rawstate>3  -0.285186 -0.647652 3.07132 </rawstate>
+    <rawstate>3  -0.219697 -0.64839 3.07832 </rawstate>
+    <rawstate>3  -0.154207 -0.649129 3.08532 </rawstate>
+    <rawstate>3  -0.0887171 -0.649867 3.09231 </rawstate>
+    <rawstate>3  -0.0232274 -0.650606 3.09931 </rawstate>
+    <rawstate>3  0.0422624 -0.651344 3.1063 </rawstate>
+    <rawstate>3  0.107752 -0.652083 3.1133 </rawstate>
+    <rawstate>3  0.173242 -0.652822 3.12029 </rawstate>
+    <rawstate>3  0.238732 -0.65356 3.12729 </rawstate>
+    <rawstate>3  0.304221 -0.654299 3.13428 </rawstate>
+    <rawstate>3  0.369711 -0.655037 3.14128 </rawstate>
+    <rawstate>3  0.435201 -0.655776 -3.13491 </rawstate>
+    <rawstate>3  0.45637 -0.656014 3.11703 </rawstate>
+    <rawstate>3  0.477539 -0.656253 3.08578 </rawstate>
+    <rawstate>3  0.498708 -0.656492 3.05453 </rawstate>
+    <rawstate>3  0.519877 -0.656731 3.02327 </rawstate>
+    <rawstate>3  0.541046 -0.656969 2.99202 </rawstate>
+    <rawstate>3  0.562215 -0.657208 2.96077 </rawstate>
+    <rawstate>3  0.583384 -0.657447 2.92952 </rawstate>
+    <rawstate>3  0.604554 -0.657686 2.89827 </rawstate>
+    <rawstate>3  0.625723 -0.657924 2.86702 </rawstate>
+    <rawstate>3  0.646892 -0.658163 2.83577 </rawstate>
+    <rawstate>3  0.668061 -0.658402 2.80452 </rawstate>
+    <rawstate>3  0.68923 -0.65864 2.77327 </rawstate>
+    <rawstate>3  0.710399 -0.658879 2.74202 </rawstate>
+    <rawstate>3  0.731568 -0.659118 2.71077 </rawstate>
+    <rawstate>3  0.752737 -0.659357 2.67952 </rawstate>
+    <rawstate>3  0.773906 -0.659595 2.64827 </rawstate>
+    <rawstate>3  0.795075 -0.659834 2.61702 </rawstate>
+    <rawstate>3  0.816245 -0.660073 2.58577 </rawstate>
+    <rawstate>3  0.837414 -0.660312 2.55452 </rawstate>
+    <rawstate>3  0.858583 -0.66055 2.52327 </rawstate>
+    <rawstate>3  0.879752 -0.660789 2.49202 </rawstate>
+    <rawstate>3  0.900921 -0.661028 2.46077 </rawstate>
+    <rawstate>3  0.92209 -0.661266 2.42952 </rawstate>
+    <rawstate>3  0.943259 -0.661505 2.39827 </rawstate>
+    <rawstate>3  0.964428 -0.661744 2.36702 </rawstate>
+    <rawstate>3  0.985597 -0.661983 2.33577 </rawstate>
+    <rawstate>3  1.00677 -0.662221 2.30452 </rawstate>
+    <rawstate>3  1.02794 -0.66246 2.27327 </rawstate>
+    <rawstate>3  1.0491 -0.662699 2.24202 </rawstate>
+    <rawstate>3  1.07027 -0.662938 2.21077 </rawstate>
+    <rawstate>3  1.09144 -0.663176 2.17952 </rawstate>
+    <rawstate>3  1.11261 -0.663415 2.14827 </rawstate>
+    <rawstate>3  1.13378 -0.663654 2.11702 </rawstate>
+    <rawstate>3  1.15495 -0.663892 2.08577 </rawstate>
+    <rawstate>3  1.17612 -0.664131 2.05452 </rawstate>
+    <rawstate>3  1.19729 -0.66437 2.02327 </rawstate>
+    <rawstate>3  1.21846 -0.664609 1.99202 </rawstate>
+    <rawstate>3  1.23963 -0.664847 1.96077 </rawstate>
+    <rawstate>3  1.2608 -0.665086 1.92952 </rawstate>
+    <rawstate>3  1.28196 -0.665325 1.89827 </rawstate>
+    <rawstate>3  1.30313 -0.665564 1.86702 </rawstate>
+    <rawstate>3  1.3243 -0.665802 1.83577 </rawstate>
+    <rawstate>3  1.34547 -0.666041 1.80452 </rawstate>
+    <rawstate>3  1.36664 -0.66628 1.77327 </rawstate>
+    <rawstate>3  1.38781 -0.666518 1.74202 </rawstate>
+    <rawstate>3  1.38704 -0.660772 1.7106 </rawstate>
+    <rawstate>3  1.38628 -0.655027 1.67919 </rawstate>
+    <rawstate>3  1.38551 -0.649281 1.64777 </rawstate>
+    <rawstate>3  1.38475 -0.643535 1.61636 </rawstate>
+    <rawstate>3  1.38398 -0.637789 1.58494 </rawstate>
+    <rawstate>3  1.38322 -0.632043 1.55353 </rawstate>
+    <rawstate>3  1.38245 -0.626297 1.52212 </rawstate>
+    <rawstate>3  1.38169 -0.620551 1.4907 </rawstate>
+    <rawstate>3  1.38092 -0.614805 1.45929 </rawstate>
+    <rawstate>3  1.38016 -0.609059 1.42787 </rawstate>
+    <rawstate>3  1.37939 -0.603313 1.39646 </rawstate>
+    <rawstate>3  1.37863 -0.597567 1.36504 </rawstate>
+    <rawstate>3  1.37786 -0.591821 1.33363 </rawstate>
+    <rawstate>3  1.3771 -0.586075 1.30221 </rawstate>
+    <rawstate>3  1.37633 -0.580329 1.2708 </rawstate>
+    <rawstate>3  1.37556 -0.574583 1.23939 </rawstate>
+    <rawstate>3  1.3748 -0.568837 1.20797 </rawstate>
+    <rawstate>3  1.37403 -0.563091 1.17656 </rawstate>
+    <rawstate>3  1.37327 -0.557345 1.14514 </rawstate>
+    <rawstate>3  1.3725 -0.551599 1.11373 </rawstate>
+    <rawstate>3  1.37174 -0.545853 1.08231 </rawstate>
+    <rawstate>3  1.37097 -0.540107 1.0509 </rawstate>
+    <rawstate>3  1.37021 -0.534361 1.01949 </rawstate>
+    <rawstate>3  1.36944 -0.528615 0.988071 </rawstate>
+    <rawstate>3  1.36868 -0.52287 0.956656 </rawstate>
+    <rawstate>3  1.36791 -0.517124 0.925242 </rawstate>
+    <rawstate>3  1.36715 -0.511378 0.893827 </rawstate>
+    <rawstate>3  1.36638 -0.505632 0.862413 </rawstate>
+    <rawstate>3  1.36562 -0.499886 0.830999 </rawstate>
+    <rawstate>3  1.36485 -0.49414 0.799584 </rawstate>
+    <rawstate>3  1.36408 -0.488394 0.76817 </rawstate>
+    <rawstate>3  1.36332 -0.482648 0.736756 </rawstate>
+    <rawstate>3  1.36255 -0.476902 0.705341 </rawstate>
+    <rawstate>3  1.36179 -0.471156 0.673927 </rawstate>
+    <rawstate>3  1.36102 -0.46541 0.642512 </rawstate>
+    <rawstate>3  1.36026 -0.459664 0.611098 </rawstate>
+    <rawstate>3  1.35949 -0.453918 0.579684 </rawstate>
+    <rawstate>3  1.35873 -0.448172 0.548269 </rawstate>
+    <rawstate>3  1.35796 -0.442426 0.516855 </rawstate>
+    <rawstate>3  1.3572 -0.43668 0.48544 </rawstate>
+    <rawstate>3  1.35643 -0.430934 0.454026 </rawstate>
+    <rawstate>3  1.35567 -0.425188 0.422612 </rawstate>
+    <rawstate>3  1.3549 -0.419442 0.391197 </rawstate>
+    <rawstate>3  1.35413 -0.413696 0.359783 </rawstate>
+    <rawstate>3  1.35337 -0.40795 0.328369 </rawstate>
+    <rawstate>3  1.3526 -0.402204 0.296954 </rawstate>
+    <rawstate>3  1.35184 -0.396458 0.26554 </rawstate>
+    <rawstate>3  1.35107 -0.390713 0.234125 </rawstate>
+    <rawstate>3  1.35031 -0.384967 0.202711 </rawstate>
+    <rawstate>3  1.34954 -0.379221 0.171297 </rawstate>
+    <rawstate>3  1.34878 -0.373475 0.139882 </rawstate>
+    <rawstate>3  1.34801 -0.367729 0.108468 </rawstate>
+    <rawstate>3  1.34725 -0.361983 0.0770535 </rawstate>
+    <rawstate>3  1.34648 -0.356237 0.0456391 </rawstate>
+    <rawstate>3  1.34572 -0.350491 0.0142247 </rawstate>
+    <rawstate>3  1.34495 -0.344745 -0.0171897 </rawstate>
+    <rawstate>3  1.34419 -0.338999 -0.0486041 </rawstate>
+    <rawstate>3  1.34342 -0.333253 -0.0800185 </rawstate>
+    <rawstate>3  1.34265 -0.327507 -0.111433 </rawstate>
+    <rawstate>3  1.34189 -0.321761 -0.142847 </rawstate>
+    <rawstate>3  1.34112 -0.316015 -0.174262 </rawstate>
+    <rawstate>3  1.34036 -0.310269 -0.205676 </rawstate>
+    <rawstate>3  1.33959 -0.304523 -0.23709 </rawstate>
+    <rawstate>3  1.33883 -0.298777 -0.268505 </rawstate>
+    <rawstate>3  1.33806 -0.293031 -0.299919 </rawstate>
+    <rawstate>3  1.3373 -0.287285 -0.331334 </rawstate>
+    <rawstate>3  1.33653 -0.281539 -0.362748 </rawstate>
+    <rawstate>3  1.33577 -0.275793 -0.394162 </rawstate>
+    <rawstate>3  1.335 -0.270047 -0.425577 </rawstate>
+    <rawstate>3  1.33424 -0.264301 -0.456991 </rawstate>
+    <rawstate>3  1.33347 -0.258555 -0.488405 </rawstate>
+    <rawstate>3  1.3327 -0.25281 -0.51982 </rawstate>
+    <rawstate>3  1.33194 -0.247064 -0.551234 </rawstate>
+    <rawstate>3  1.33117 -0.241318 -0.582649 </rawstate>
+    <rawstate>3  1.33041 -0.235572 -0.614063 </rawstate>
+    <rawstate>3  1.32964 -0.229826 -0.645477 </rawstate>
+    <rawstate>3  1.32888 -0.22408 -0.676892 </rawstate>
+    <rawstate>3  1.35938 -0.213894 -0.646124 </rawstate>
+    <rawstate>3  1.38989 -0.203709 -0.615356 </rawstate>
+    <rawstate>3  1.42039 -0.193523 -0.584588 </rawstate>
+    <rawstate>3  1.4509 -0.183338 -0.553821 </rawstate>
+    <rawstate>3  1.48141 -0.173153 -0.523053 </rawstate>
+    <rawstate>3  1.51191 -0.162967 -0.492285 </rawstate>
+    <rawstate>3  1.54242 -0.152782 -0.461517 </rawstate>
+    <rawstate>3  1.57292 -0.142596 -0.430749 </rawstate>
+    <rawstate>3  1.60343 -0.132411 -0.399981 </rawstate>
+    <rawstate>3  1.63393 -0.122225 -0.369214 </rawstate>
+    <rawstate>3  1.66444 -0.11204 -0.338446 </rawstate>
+    <rawstate>3  1.69494 -0.101854 -0.307678 </rawstate>
+    <rawstate>3  1.72545 -0.091669 -0.27691 </rawstate>
+    <rawstate>3  1.75596 -0.0814835 -0.246142 </rawstate>
+    <rawstate>3  1.78646 -0.0712981 -0.215375 </rawstate>
+    <rawstate>3  1.81697 -0.0611127 -0.184607 </rawstate>
+    <rawstate>3  1.84747 -0.0509272 -0.153839 </rawstate>
+    <rawstate>3  1.87798 -0.0407418 -0.123071 </rawstate>
+    <rawstate>3  1.90848 -0.0305563 -0.0923034 </rawstate>
+    <rawstate>3  1.93899 -0.0203709 -0.0615356 </rawstate>
+    <rawstate>3  1.96949 -0.0101854 -0.0307678 </rawstate>
+    <rawstate>3  2 -0 0 </rawstate>
+</path_piecewise_linear>
