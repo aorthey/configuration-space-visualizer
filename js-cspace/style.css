@@ -2,6 +2,9 @@
   --main-bg-color: coral;
 }
 
+canvas{
+  background-color: transparent;
+}
 .slidecontainer{
   width: 80%;
 }

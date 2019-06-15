@@ -4,7 +4,6 @@
     <title>Configuration Space Visualizer</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
     <h1>2-DoF Manipulator</h1>
 
@@ -23,185 +22,50 @@
     <span>MOUSE CLICK Y</span> <span id="posCircleCanvas"></span>
     <br>
 
+    <!-- <canvas id="configuration-space" style="border:1px solid #000000;"> -->
+    <!--   This text is displayed if your browser does not support -->
+    <!--   HTML5 Canvas. -->
+    <!-- </canvas> -->
+
+
     <canvas id="workspace" style="border:1px solid #000000;">
       This text is displayed if your browser does not support
       HTML5 Canvas.
     </canvas>
-    <canvas id="configuration-space" style="border:1px solid #000000;">
-      This text is displayed if your browser does not support
-      HTML5 Canvas.
-    </canvas>
+
+    <div style="position: relative;">
+      <canvas id="cspace1" style="border:1px solid #000000; z-index: 0">
+        This text is displayed if your browser does not support
+        HTML5 Canvas.
+      </canvas>
+      <canvas id="cspace2" style="position: absolute; left: 0; top: 0; z-index: 1; border:1px solid #000000;">
+      </canvas>
+    </div>
+
     <!-- <canvas id="workspace-reduced" style="border:1px solid #000000;"> -->
     <!--   This text is displayed if your browser does not support -->
     <!--   HTML5 Canvas. -->
     <!-- </canvas> -->
-    <canvas id="quotient-space" style="border:1px solid #000000;">
-      This text is displayed if your browser does not support
-      HTML5 Canvas.
-    </canvas>
+    <!-- <canvas id="quotient-space" style="border:1px solid #000000;"> -->
+    <!--   This text is displayed if your browser does not support -->
+    <!--   HTML5 Canvas. -->
+    <!-- </canvas> -->
+    <div style="position: relative;">
+      <canvas id="qspace1" style="border:1px solid #000000; z-index: 0">
+        This text is displayed if your browser does not support
+        HTML5 Canvas.
+      </canvas>
+      <canvas id="qspace2" style="position: absolute; left: 0; top: 0; z-index: 1; border:1px solid #000000;">
+      </canvas>
+    </div>
 
     <script src="robot.js"></script>
     <script src="obstacle.js"></script>
     <script src="canvas_configuration_space.js"></script>
+    <script src="canvas_configuration_space_layered.js"></script>
     <script src="main.js"></script>
     <script type="text/javascript">
       init();
     </script>
-
-
-      <!-- <div class="row"> -->
-      <!--   <h3>Workspace</h3> -->
-      <!--       <table> -->
-      <!--         <tr> -->
-      <!--           <td style="text-align: left;">\(y\)</td> -->
-      <!--           <td colspan="12"> -->
-      <!--             <canvas id="workspace" style="border:1px solid #000000;"> -->
-      <!--               This text is displayed if your browser does not support -->
-      <!--               HTML5 Canvas. -->
-      <!--             </canvas> -->
-      <!--           </td> -->
-      <!--         </tr> -->
-      <!--         <tr> -->
-      <!--           <td colspan="15" style="text-align: center;">\(x\)</td> -->
-      <!--         </tr> -->
-      <!--       </table> -->
-      <!-- </div> -->
-    <!--     <div class="col-md-4"> -->
-    <!--       <canvas -->
-    <!--         id="shoulderControl" -->
-    <!--         style="border:1px solid #000000;" -->
-    <!--       ></canvas> -->
-    <!--       <canvas id="elbowControl" style="border:1px solid #000000;"></canvas> -->
-    <!--       <p> -->
-    <!--         Base Length: <span id="baseLenField">3.0</span><br /> -->
-    <!--         <canvas -->
-    <!--           id="baseLenCanvas" -->
-    <!--           style="border:1px solid #000000;" -->
-    <!--           height="15" -->
-    <!--         ></canvas> -->
-    <!--       </p> -->
-    <!--       <p> -->
-    <!--         Shoulder Length: <span id="shoulderLenField">3.0</span><br /> -->
-    <!--         <canvas -->
-    <!--           id="shoulderLenCanvas" -->
-    <!--           style="border:1px solid #000000;" -->
-    <!--           height="15" -->
-    <!--         ></canvas> -->
-    <!--       </p> -->
-    <!--       <p> -->
-    <!--         Elbow Length: <span id="elbowLenField" Control>3.0</span><br /> -->
-    <!--         <canvas -->
-    <!--           id="elbowLenCanvas" -->
-    <!--           style="border:1px solid #000000;" -->
-    <!--           height="15" -->
-    <!--         ></canvas> -->
-    <!--       </p> -->
-    <!--       <p> -->
-    <!--         <button class="btn btn-primary" id="start" onclick="start()"> -->
-    <!--           Start</button -->
-    <!--         >&nbsp; -->
-    <!--         <button class="btn btn-danger" id="stop" onclick="stop()"> -->
-    <!--           Stop</button -->
-    <!--         >&nbsp; -->
-    <!--         <button class="btn btn-success" id="reset" onclick="reset()"> -->
-    <!--           Reset -->
-    <!--         </button> -->
-    <!--       </p> -->
-    <!--     </div> -->
-    <!--   </div> -->
-    <!--   <div class="row"> -->
-    <!--     <h3>Configuration Space</h3> -->
-    <!--     <div class="col-md-6"> -->
-    <!--       <div> -->
-    <!--         <table> -->
-    <!--           <tr> -->
-    <!--             <td>\(\varphi_e\)</td> -->
-    <!--             <td> -->
-    <!--               <table> -->
-    <!--                 <tr style="height: 100px;"> -->
-    <!--                   <td style="vertical-align: top;">-\(\pi\)</td> -->
-    <!--                 </tr> -->
-    <!--                 <tr style="height: 100px;"> -->
-    <!--                   <td style="vertical-align: middle; text-align: right;"> -->
-    <!--                     0 -->
-    <!--                   </td> -->
-    <!--                 </tr> -->
-    <!--                 <tr style="height: 100px;"> -->
-    <!--                   <td style="vertical-align: bottom;">\(\pi\)</td> -->
-    <!--                 </tr> -->
-    <!--               </table> -->
-    <!--             </td> -->
-    <!--             <td colspan="2"> -->
-    <!--               <canvas -->
-    <!--                 id="configuration-space" -->
-    <!--                 style="border: 1px solid #000000;" -->
-    <!--               ></canvas> -->
-    <!--             </td> -->
-    <!--           </tr> -->
-    <!--           <tr> -->
-    <!--             <td colspan="2"></td> -->
-    <!--             <td style="text-align: left; width: 100px;">-\(\pi\)</td> -->
-    <!--             <td style="text-align: left; width: 100px;">0</td> -->
-    <!--             <td style="text-align: left; width: 100px;">\(\pi\)</td> -->
-    <!--           </tr> -->
-    <!--           <tr> -->
-    <!--             <td colspan="2"></td> -->
-    <!--             <td colspan="2" style="text-align: center;">\(\varphi_s\)</td> -->
-    <!--           </tr> -->
-    <!--         </table> -->
-    <!--       </div> -->
-    <!--     </div> -->
-    <!--   </div> -->
-
-    <!-- </div> -->
-
-    <!-- <script type="text/javascript"> -->
-    <!--   // initialization vars and constants -->
-
-    <!--   var globalId; // handle for animation using requestAnimationFrame -->
-
-    <!--   var canWorkspace; // workspace canvas -->
-    <!--   var ctxWorkspace; // workspace 2d context -->
-
-    <!--   var canConfiguration; // configuration canvas -->
-    <!--   var ctxConfiguration; // configuration 2d context -->
-
-    <!--   var canShoulder; // shoulder control canvas -->
-    <!--   var ctxShoulder; // shoulder control 2d context -->
-
-    <!--   var canElbow; // elbow control canvas -->
-    <!--   var ctxElbow; // elbow control 2d context -->
-
-    <!--   const worldWidth = 12; // box width in workspace units -->
-    <!--   const worldHeight = 10; // box height in workspace units -->
-    <!--   var canvasWidth = 30 * worldWidth; // width in pixels of workspace canvas -->
-    <!--   var canvasHeight = 30 * worldHeight; // height in pixels of workspace canvas -->
-
-    <!--   const baseColor = "black"; // color of base segment -->
-    <!--   const shoulderColor = "blue"; // color of shoulder segment -->
-    <!--   const elbowColor = "green"; // color of elbow segment -->
-
-    <!--   // initial robot arm state -->
-    <!--   var baseLength = 4; // height of arm base in world units -->
-
-    <!--   var elbowAngle = 0; // initial angle of elbow joint -->
-    <!--   var elbowLength = 3; // length of elbow segment -->
-    <!--   var deltaElbowAngle = 0.1; // change in elbow angle (radians -pi to pi) during each tick of animation -->
-    <!--   var deltaElbowDirection = 1; // direction of angle increment (+1 or -1). -->
-
-    <!--   var shoulderAngle = 0; // initial angle of shoulder joint -->
-    <!--   var shoulderLength = 2; // length of shoulder segment -->
-    <!--   var deltaShoulderAngle = 0.01; // change in shoulder angle (radians -pi to pi) during each tick of animation -->
-    <!--   var deltaShoulderDirection = 1; // direction of angle increment (+1 or -1). -->
-
-    <!--   var blocks = []; // array of blocks defined by the user in the workspace -->
-    <!--   // each block is a rectangular object defined in world units -->
-    <!-- </script> -->
-    <!-- <script src="config-work.js"></script> -->
-    <!-- <script src="c_config-work.js"></script> -->
-    <!-- <script type="text/javascript"> -->
-    <!--   init(); -->
-    <!-- </script> -->
   </body>
-  <!-- Copyright 2019 jim conallen, jconallen@acm.org -->
 </html>
