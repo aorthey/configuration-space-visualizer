@@ -328,8 +328,8 @@ def PlotSamples3D(fname, dim1=4, dim2=5, dim3=6, maxElements=float('inf')):
 
   ax.scatter(t1, t2, t3, marker='x', color='green')
 
-  ax.set_xlabel('X')
-  ax.set_ylabel('Y')
-  ax.set_zlabel(r'$\theta$')
+  # ax.set_xlabel('X')
+  # ax.set_ylabel('Y')
+  # ax.set_zlabel(r'$\theta$')
   # plt.scatter(t4, t5, t6, marker='o', color='red')
   plt.show()
