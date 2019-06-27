@@ -70,7 +70,7 @@ def plotCSpaceDelaunay(PX,PT, maximumEdgeLength = 0.25, continuous=True):
   plt.xlabel('x')
   fig.autofmt_xdate()
   #plt.ylabel('q',rotation=0)
-  plt.ylabel(r'\theta',rotation=0)
+  # plt.ylabel(r'\theta',rotation=0)
   dxax=0.45
   dyax=0.05
   fig.patch.set_facecolor('white')
@@ -182,9 +182,12 @@ def plotCSpaceCylindricalProjection(PX,PT):
   ax.plot_trisurf(X,Y,Z, \
       triangles=tris.get_masked_triangles(),cmap=plt.cm.Spectral, \
        linewidth=0, antialiased=False)
-  ax.set_xlabel(r'r')
-  ax.set_ylabel(r'\phi')
-  ax.set_zlabel(r'z')
+  # ax.set_xlabel(r'r')
+  # ax.set_ylabel(r'\phi')
+  # ax.set_zlabel(r'z')
+  ax.set_xlabel('r')
+  ax.set_ylabel('phi')
+  ax.set_zlabel('z')
   ax.tick_params(axis='both', which='major', pad=15)
 
 def getPoints(fname, maxElements = float('inf')):
