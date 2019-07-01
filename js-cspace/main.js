@@ -1,14 +1,30 @@
 //*****************************************************************************
 //Control Elements
 //*****************************************************************************
-function userEventSlider(event) {
+function CreateCanvas(name)
+{
+  var lines = '';
+  lines += '<canvas id='+name+' style="border:1px solid #000000;">';
+  lines += '  This text is displayed if your browser does not support HTML5 Canvas.';
+  lines += '</canvas>';
+  console.log(lines);
+  document.write(lines);
+
+  var canvas = document.getElementById(name);
+
+  return canvas;
+}
+
+function userEventSlider(event) 
+{
   documentState.robot.l1 = lengthL1.value;
   documentState.robot.l2 = lengthL2.value;
   documentState.robot.update(qL1.value, qL2.value);
   documentState.valid = false;
 }
 
-function CreateSlider(name, min, max, step, value){
+function CreateSlider(name, min, max, step, value)
+{
   var lines = '';
   lines += '<div class="slidecontainer">';
   lines += '<span>'+name+' </span>';
@@ -221,6 +237,7 @@ DocumentState.prototype.windowResizeEvent = function() {
   cspace1.height = workspace.height;
   cspace2.width = workspace.width;
   cspace2.height = workspace.height;
+
   qspace1.width = workspace.width;
   qspace1.height = workspace.height;
   qspace2.width = workspace.width;
@@ -255,11 +272,12 @@ function init(){
   linkWidth = 10;
   fillColor = "#AAAAAA";
 
+  workspace = CreateCanvas("workspace")
   cspace1 = document.getElementById("cspace1");
   cspace2 = document.getElementById("cspace2");
   qspace1 = document.getElementById("qspace1");
   qspace2 = document.getElementById("qspace2");
-  workspace = document.getElementById("workspace");
+  // workspace = document.getElementById("workspace");
 
   documentState = new DocumentState(workspace, cspace1, cspace2, qspace1, qspace2);
   outputD1 = document.getElementById("wSize");
@@ -269,13 +287,13 @@ function init(){
   outputRobotPoseQ1 = document.getElementById("robot_q1");
   outputRobotPoseQ2 = document.getElementById("robot_q2");
 
-  qL1 = CreateSlider("Joint1 Angle", -3.14, 3.14, 0.01, 0);
-  qL2 = CreateSlider("Joint2 Angle", -3.14, 3.14, 0.01, 0);
-  lengthL1 = CreateSlider("Link1 Length", 0.5, 1.5, 0.01, 1);
-  lengthL2 = CreateSlider("Link2 Length", 0.5, 1.5, 0.01, 1);
+  // qL1 = CreateSlider("Joint1 Angle", -3.14, 3.14, 0.01, 0);
+  // qL2 = CreateSlider("Joint2 Angle", -3.14, 3.14, 0.01, 0);
+  // lengthL1 = CreateSlider("Link1 Length", 0.5, 1.5, 0.01, 1);
+  // lengthL2 = CreateSlider("Link2 Length", 0.5, 1.5, 0.01, 1);
 
   documentState.addObstacle(new Obstacle(300,200,50,50));
-  documentState.robot.update(qL1.value, qL2.value);
+  documentState.robot.update(0, 0);
   documentState.valid = false; 
   documentState.addEvent(window, "resize", documentState.windowResizeEvent);
   documentState.windowResizeEvent(); 

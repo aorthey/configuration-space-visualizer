@@ -8,7 +8,7 @@ function CanvasConfigurationSpaceLayered(canvas1, canvas2)
   this.ctx_background = this.background.getContext('2d');
   this.valid = false;
   this.qspace = false;
-  this.resolution_step = 2; //higher => faster but coarser image
+  this.resolution_step = 3; //higher => faster but coarser image
 
   // var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
   if (document.defaultView && document.defaultView.getComputedStyle) {
@@ -155,7 +155,17 @@ function hitBlock(segment, block) {
   return bottom | top | left | right;
 }
 
-CanvasConfigurationSpaceLayered.prototype.drawLabels = function() {
+CanvasConfigurationSpaceLayered.prototype.drawLabels = function() 
+{
+  this.ctx.save();
+  this.ctx.beginPath();
+  this.ctx.fillStyle = "blue";
+  this.ctx.lineWidth = 10;
+  this.ctx.strokeStyle = "#000000";
+  this.ctx.moveTo(0, this.height);
+  this.ctx.lineTo(this.width, this.height);
+  this.ctx.stroke();
+  this.ctx.restore();
 
 }
 

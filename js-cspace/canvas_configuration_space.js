@@ -150,8 +150,8 @@ function hitBlock(segment, block) {
   return bottom | top | left | right;
 }
 
-CanvasConfigurationSpace.prototype.drawLabels = function() {
-
+CanvasConfigurationSpace.prototype.drawLabels = function() 
+{
 }
 
 CanvasConfigurationSpace.prototype.draw = function() {
