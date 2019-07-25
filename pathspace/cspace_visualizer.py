@@ -2,19 +2,23 @@ import pickle as pk
 
 import sys
 import numpy as np
+import math
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 from matplotlib import rc
 rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 ## for Palatino and other serif fonts use:
 #rc('font',**{'family':'serif','serif':['Palatino']})
-rc('text', usetex=True)
+rc('text', usetex=False)
 rc('font', family='serif', size=30)
 
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.tri as mtri
 from scipy.spatial import Delaunay
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.patches import FancyArrowPatch
+from mpl_toolkits.mplot3d import proj3d
 
 pointsize = 20
 
@@ -80,7 +84,8 @@ def plotCSpaceDelaunay(PX,PT, maximumEdgeLength = 0.25, continuous=True):
 
   ax.tick_params(axis='both', which='major', pad=15)
 
-def plotCSpaceDelaunayGrey(P1,P2,maximumEdgeLength=0.2, shade=0.8):
+#plots the 2D triangulated space with all infeasible points in grey and three possible paths in different colors
+def plotCSpaceDelaunayGrey(fname1,fname2,fname3,P1,P2,maximumEdgeLength=0.2, shade=0.8):
   points2D=np.vstack([P1,P2]).T
   tri = Delaunay(points2D)
   # print tri.simplices.shape, '\n', tri.simplices[0]
@@ -99,15 +104,56 @@ def plotCSpaceDelaunayGrey(P1,P2,maximumEdgeLength=0.2, shade=0.8):
     if max_edge <= maximumEdgeLength:
       triangles = np.vstack((triangles, simplex))
 
+  plotPath(fname1, "red")
+  plotPath(fname2, "green")
+  plotPath(fname3, "blue")
+  Qu = np.array(getPath(fname1))
+  
+  plt.scatter(Qu[0,0], Qu[0,1], marker = "o", s=20, linewidths = 5, color = "green")
+  plt.scatter(Qu[Qu.size/2 - 1,0], Qu[Qu.size/2 - 1,1], marker = "x", s=50, linewidths = 5, color = "red")
+  
   zFaces = np.ones(triangles.shape[0])
   cmap = colors.LinearSegmentedColormap.from_list("", [(shade,shade,shade),"grey","grey"])
   plt.tripcolor(P1, P2, triangles, cmap=cmap, facecolors=zFaces,edgecolors='none')
+  
+def plotPath(fname, colour):
+  Qu = np.array(getPath(fname))
+  p1 = Qu[:,0]
+  p2 = Qu[:,1]
+  p1 = p1.astype(float)
+  p2 = p2.astype(float)
+  #for theta in p2:
+    #  theta = math.cos(theta)
+  #plt.plot(Qu[:,0], Qu[:,1])
+  plt.plot(p1, p2, linewidth=2.5, color= colour)
+  
+def plotPathCylindrical(fname, colour):
+  Qu = np.array(getPath(fname))
+  p1 = Qu[:,0]
+  pz = Qu[:,1]
+  p1 = p1.astype(float)
+  pz = pz.astype(float)
+  #px = np.ndarray(pz.size)
+  #py = np.ndarray(pz.size)
+  
+  px = np.cos(p1)
+  py = np.sin(p1)
+  #i = 0
+  #for theta in p1:
+  #   px[i] = math.cos(theta)
+  #   py[i] = math.sin(theta)
+  #   i = i + 1
+  #plt.plot(Qu[:,0], Qu[:,1])
+  plt.plot(px, py, pz, linewidth = 4, color = colour)
+  
 
-def plotCSpaceDelaunay3D(P1,P2,maximumEdgeLength=0.25):
+def plotCSpaceDelaunay3D(fname1,fname2,fname3,P1,P2,maximumEdgeLength=0.25):
   points2D=np.vstack([P1,P2]).T
   tri = Delaunay(points2D)
   # print tri.simplices.shape, '\n', tri.simplices[0]
 
+  fig = plt.figure()
+  ax = fig.gca(projection = '3d')
   triangles = np.array((tri.simplices[0]))
   for i in range(0, tri.simplices.shape[0]):
     simplex = tri.simplices[i]
@@ -120,11 +166,48 @@ def plotCSpaceDelaunay3D(P1,P2,maximumEdgeLength=0.25):
     max_edge = max([d0, d1, d2])
     if max_edge <= maximumEdgeLength:
       triangles = np.vstack((triangles, simplex))
+  
+  #Qu = np.array(getPath(fname1))
+  #plotCSpacePathCylindricalProjection(Qu[:,1].astype(float), Qu[:,0].astype(float))
+  
+  #Qu = np.array(getPath(fname2))
+  #plotCSpacePathCylindricalProjection(Qu[:,1].astype(float), Qu[:,0].astype(float))
+  
+  #Qu = np.array(getPath(fname3))
+  #plotCSpacePathCylindricalProjection(Qu[:,1].astype(float), Qu[:,0].astype(float))
+  
+  plotPathCylindrical(fname1, "red")
+  plotPathCylindrical(fname2, "green")
+  plotPathCylindrical(fname3, "blue")
+  plotStartGoal(fname1)
 
+  u = np.linspace(0,3.14,100)
+  v = np.linspace(-1.5,1.5,100)
+  x = np.cos(u)
+  y = np.sin(u)
+  z = v
+  ax.plot_trisurf(triangles)
+  ax.show()
   zFaces = np.ones(triangles.shape[0])
   cmap = colors.LinearSegmentedColormap.from_list("", [(0.8,0.8,0.8),"grey","grey"])
-  plt.tripcolor(P1, P2, triangles, cmap=cmap, facecolors=zFaces,edgecolors='none')
+  #plt.tripcolor(P1, P2, triangles, cmap=cmap, facecolors=zFaces,edgecolors='none')
+  #plt.tripcolor(P1, P2, triangles, facecolors=zFaces,edgecolors='none')
+  
+    
 
+def plotStartGoal(fname):
+  Qu = np.array(getPath(fname))
+  startx = np.cos(Qu[0,0].astype(float))
+  starty = np.sin(Qu[0,0].astype(float))
+  startz = Qu[0,1].astype(float)
+  goalx = np.cos(Qu[Qu.size/2 - 1,0].astype(float))
+  goaly = np.sin(Qu[Qu.size/2 - 1,0].astype(float))
+  goalz = Qu[Qu.size/2 - 1,1].astype(float)
+  #plt.scatter(math.cos(Qu[0,1]), math.sin(Qu[0,1]), Qu[0,0], marker = "o", s=20, linewidths = 5, color = "green")
+  #plt.scatter(math.cos(Qu[Qu.size/2 - 1,1]), math.sin(Qu[Qu.size/2 - 1,1]), Qu[Qu.size/2 - 1,0], marker = "x", s=50, linewidths = 5, color = "red")
+  plt.plot([startx], [starty], [startz], marker = "o", markersize = pointsize/2, color = "green")
+  plt.plot([goalx], [goaly], [goalz], marker = "o", markersize = pointsize/2, color = "red")
+      
 
 def long_edges(x, y, triangles, radio=22):
   out = []
@@ -152,19 +235,31 @@ def plotCSpacePathCylindricalProjection(pathX,pathT):
   Z = pathX
   plt.plot(X,Y,Z,'-k',linewidth=5)
   #plt.scatter(X[0],Y[0],Z[0],c='k',s=pointsize)
-  plt.plot([X[0]], [Y[0]], [Z[0]], markerfacecolor='k', markeredgecolor='k', marker='o', markersize=pointsize)
-  plt.plot([X[-1]], [Y[-1]], [Z[-1]], markerfacecolor='k', markeredgecolor='k', marker='o', markersize=pointsize)
+  plt.plot([X[0]], [Y[0]], [Z[0]], markerfacecolor='k', markeredgecolor='k', marker='o', markersize=pointsize/2)
+  plt.plot([X[-1]], [Y[-1]], [Z[-1]], markerfacecolor='k', markeredgecolor='k', marker='o', markersize=pointsize/2)
   #plt.scatter(X[-1],Y[-1],Z[-1],s=20,c='k')
 
-def plotCSpaceCylindricalProjection(PX,PT):
-  X = np.cos(PT)
-  Y = np.sin(PT)
-  Z = PX
+def plotCSpaceCylindricalProjection(PX,PT,fname1,fname2,fname3):
+  #X = np.cos(PT)
+  #Y = np.sin(PT)
+  xs, ys, Z = [],[],[]
+  for i in range(0,PX.size):
+      if PX[i] <= 1.5 and PX[i] >= -1.5 and PX[i] != 1 and PX[i] != -1:
+          Z.append(PX[i])
+          xs.append(np.cos(PT[i]))
+          ys.append(np.sin(PT[i]))
 
-  rad = np.linalg.norm(X)
-  zen = np.arccos(Z)
-  azi = np.arctan2(Y,X)
+  #print(xs.size,ys.size,Z.size)
+  xs, ys, Z = np.asarray(xs),np.asarray(ys),np.asarray(Z)
+  rad = np.linalg.norm(xs)
+  zen = np.arccos(Z/1.51)
+  azi = np.arctan2(ys,xs)
 
+  #rad = 1
+  #zen = X
+  #azi = Y
+
+  
   tris = mtri.Triangulation(zen, azi)
 
   mask = long_edges(zen,azi, tris.triangles, 0.2)
@@ -179,16 +274,53 @@ def plotCSpaceCylindricalProjection(PX,PT):
   fig = plt.figure(1)
   fig.patch.set_facecolor('white')
   ax  = fig.add_subplot(111, projection='3d')
-  ax.plot_trisurf(X,Y,Z, \
-      triangles=tris.get_masked_triangles(),cmap=plt.cm.Spectral, \
+  ax.axis('off')
+  
+  #plot own axes
+  #plt.plot([1,1],[0,0], [-2,2], color = 'black', linewidth = '2')
+  ta = np.linspace(np.pi/2,np.pi,50)
+  xa = np.cos(ta)
+  ya = -np.sin(ta)
+  plt.plot(xa,ya,-1.57*np.ones(50), color = 'black', linewidth = '2')
+  theta1 = Arrow3D([-1,-1],[0,0],[-1.57,2], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = 'theta1')
+  theta1.set_label("theta1")
+  #ax.add_artist(theta1)
+  theta2 = Arrow3D([-0.01,0.01],[-1,-1],[-1.57,-1.57], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "theta2")
+  ax.add_artist(theta2)
+  
+  #ax.plot_trisurf(X,Y,Z, \
+  #    triangles=tris.get_masked_triangles(),cmap=plt.cm.Spectral, \
+  #     linewidth=0, antialiased=False)
+  ax.plot_trisurf(xs,ys,Z, \
+      triangles=tris.get_masked_triangles(),color = "grey", \
        linewidth=0, antialiased=False)
+  
+  
   # ax.set_xlabel(r'r')
   # ax.set_ylabel(r'\phi')
   # ax.set_zlabel(r'z')
-  ax.set_xlabel('r')
-  ax.set_ylabel('phi')
-  ax.set_zlabel('z')
+  
+  plotPathCylindrical(fname1, "magenta")
+  plotPathCylindrical(fname2, "magenta")
+  plotPathCylindrical(fname3, "magenta")
+  plotStartGoal(fname1)
+  #plotCylinder()
+  
+  x=np.linspace(-1, 1, 100)
+  z=np.linspace(-1.57, 1.57, 100)
+  Xc, Zc=np.meshgrid(x, z)
+  Yc = np.sqrt(1-Xc**2)
+
+  rstride = 20
+  cstride = 10
+  ax.plot_wireframe(Xc, Yc, Zc, alpha=0.4, rstride=rstride, cstride=cstride, linestyles = "dashed")
+  ax.plot_wireframe(Xc, -Yc, Zc, alpha=0.4, rstride=rstride, cstride=cstride, linestyles = "dashed")
+
+  ax.set_xlabel('')
+  ax.set_ylabel('')
+  ax.set_zlabel('')
   ax.tick_params(axis='both', which='major', pad=15)
+
 
 def getPoints(fname, maxElements = float('inf')):
   ### output: [feasible {True,False}, sufficient {True,False}, open_ball_radius
@@ -227,6 +359,29 @@ def getPoints(fname, maxElements = float('inf')):
     Q.append(q)
     ctr += 1
   return Q
+
+def getPath(fname, maxElements = float('inf')):
+  import xml.etree.ElementTree
+  root = xml.etree.ElementTree.parse(fname).getroot()
+  Q = list()
+  ctr = 0
+  for child in root.findall('state'):
+    if ctr > maxElements:
+      return Q
+    state = child.text
+    state = state.split(" ")
+    q = list()
+  
+    for s in state:
+      if s != '':
+          if s != '2':
+             q.append(s)
+
+    Q.append(q)
+    ctr += 1
+  
+  return Q
+        
 
 def generateInfeasibleSamplesOneDim(fname, dim1=0, maxElements = float('inf')):
   Q = getPoints(fname)
@@ -303,6 +458,7 @@ def PlotSamples(fname, dim1=4, dim2=5, maxElements=float('inf')):
 
   plt.scatter(t1,t2, marker='x', color='green')
   plt.scatter(t3,t4, marker='o', color='red')
+  
   plt.show()
 
 def PlotSamples3D(fname, dim1=4, dim2=5, dim3=6, maxElements=float('inf')):
@@ -336,3 +492,14 @@ def PlotSamples3D(fname, dim1=4, dim2=5, dim3=6, maxElements=float('inf')):
   # ax.set_zlabel(r'$\theta$')
   # plt.scatter(t4, t5, t6, marker='o', color='red')
   plt.show()
+  
+class Arrow3D(FancyArrowPatch):
+    def __init__(self, xs, ys, zs, *args, **kwargs):
+        FancyArrowPatch.__init__(self, (0,0), (0,0), *args, **kwargs)
+        self._verts3d = xs, ys, zs
+
+    def draw(self, renderer):
+        xs3d, ys3d, zs3d = self._verts3d
+        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, renderer.M)
+        self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
+        FancyArrowPatch.draw(self, renderer)
