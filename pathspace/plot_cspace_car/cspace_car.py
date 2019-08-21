@@ -41,7 +41,7 @@ ax.axis('off')
 plt.subplots_adjust(top=0.7)
 ax.view_init(elev = 25, azim = -60)
 
-# plt.savefig(csname, bbox_inches='tight')
+plt.savefig(fname+".svg", bbox_inches='tight', format='svg')
 fig.tight_layout()
 plt.show()
 

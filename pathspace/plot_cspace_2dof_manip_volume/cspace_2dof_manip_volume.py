@@ -20,16 +20,16 @@ if not plot_only_3D:
 ################################################################################
 ### CSPACE 2D
 ################################################################################
-  fig = plt.figure(1)
-  fig.patch.set_facecolor('white')
-  ax = fig.gca()
-  ax.set_xlabel(r'\theta_1',fontsize=font_size)
-  ax.set_ylabel(r'\theta_2',rotation=1.57,fontsize=font_size)
-  ax.tick_params(axis='both', which='major', pad=15)
-  plt.axis([-3.14,3.14,-1.57,1.57])
-  plotCSpaceDelaunayGrey(fname1,fname2,fname3,C1,C2,0.3)
+  # fig = plt.figure(1)
+  # fig.patch.set_facecolor('white')
+  # ax = fig.gca()
+  # ax.set_xlabel(r'\theta_1',fontsize=font_size)
+  # ax.set_ylabel(r'\theta_2',rotation=1.57,fontsize=font_size)
+  # ax.tick_params(axis='both', which='major', pad=15)
+  # plt.axis([-3.14,3.14,-1.57,1.57])
+  # plotCSpaceDelaunayGrey(fname1,fname2,fname3,C1,C2,0.3)
 
-  plt.show()
+  # plt.show()
 
 
 ################################################################################
@@ -37,7 +37,6 @@ if not plot_only_3D:
 ################################################################################
 fig = plt.figure(1,figsize = [6,7.8])
 #fig.patch.set_facecolor('white')
-
 
 ax = fig.add_subplot(111, projection = '3d')
 ax.axis('off')
@@ -51,5 +50,6 @@ C2 = C2.astype(float)
 plotCSpaceCylindricalProjection(C2,C1,fname1,fname2,fname3,ax)
 plt.subplots_adjust(top=0.9)
 fig.tight_layout()
+plt.savefig(fname+".svg", bbox_inches='tight', format='svg')
 plt.show()
 

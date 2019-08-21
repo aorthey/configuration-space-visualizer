@@ -211,6 +211,10 @@ def plotCSpaceCylindricalProjection(PX,PT,fname1,fname2,fname3,ax):
   plt.plot(xa,ya,z*np.ones(50), color = 'black', linewidth = '2')
   theta3 = Arrow3D([-0.01,0.01],[-1,-1],[z,z], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "theta2")
   plt.plot([0,0],[0,0],[-4,-6.6], color ='black', linewidth = '2.5')
+  x3,y3,z3 = 0.1, 0, -8.5
+  ax.text(x3,y3,z3, r'${\pi}(p_1)$')
+  x3,y3,z3 = 0.5, 0, -5.4
+  ax.text(x3,y3,z3, r'${\pi}(p_3)$')
   ax.add_artist(theta3)
   ax.text(-1,-1.2,z, r'${\theta}_1$')
   
