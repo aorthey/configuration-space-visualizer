@@ -1,5 +1,7 @@
 import pickle as pk
 
+import matplotlib.path as mpath
+import matplotlib.patches as mpatches
 import sys
 import numpy as np
 import math
@@ -23,8 +25,9 @@ from mpl_toolkits.mplot3d import proj3d
 pointsize = 20
 
 #plots the 2D triangulated space with all infeasible points in grey and three possible paths in different colors
-def plotCSpaceDelaunayGrey(fname1,fname2,fname3,P1,P2,maximumEdgeLength=0.2, shade=0.8):
+def plotCSpaceDelaunayGrey(fname1,fname2,P1,P2,maximumEdgeLength=0.2, shade=0.8):
   points2D=np.vstack([P1,P2]).T
+  print(points2D)
   tri = Delaunay(points2D)
   # print tri.simplices.shape, '\n', tri.simplices[0]
 
@@ -41,26 +44,33 @@ def plotCSpaceDelaunayGrey(fname1,fname2,fname3,P1,P2,maximumEdgeLength=0.2, sha
     max_edge = max([d0, d1, d2])
     if max_edge <= maximumEdgeLength:
       triangles = np.vstack((triangles, simplex))
-
-  plotPath(fname1, "magenta")
-  plotPath(fname2, "magenta")
-  plotPath(fname3, "magenta")
-  Qu = np.array(getPath(fname1))
-  
-  plt.scatter(Qu[0,0], Qu[0,1], marker = "o", s=20, linewidths = 5, color = "green")
-  plt.scatter(Qu[Qu.size//2 - 1,0], Qu[Qu.size//2 - 1,1], marker = "x", s=50, linewidths = 5, color = "red")
   
   zFaces = np.ones(triangles.shape[0])
   cmap = colors.LinearSegmentedColormap.from_list("", [(shade,shade,shade),"grey","grey"])
   plt.tripcolor(P1, P2, triangles, cmap=cmap, facecolors=zFaces,edgecolors='none')
   
-def plotPath(fname, colour):
+def plotPath(fname, ax, colour, arrowpos=0.3, xarrowoffset=0.1, yarrowoffset=0.1, name=r'$p_1$'):
   Qu = np.array(getPath(fname))
-  p1 = Qu[:,0]
-  p2 = Qu[:,1]
+  p1 = Qu[:,1]
+  p2 = Qu[:,4]
   p1 = p1.astype(float)
   p2 = p2.astype(float)
-  plt.plot(p1, p2, linewidth=2.5, color= colour)
+
+  N = int(arrowpos*Qu[:,0].size)
+
+  xmid = float(Qu[N, 1])
+  ymid = float(Qu[N, 4])
+  dxmid = float(Qu[N+2, 1]) - xmid
+  dymid = float(Qu[N+2, 4]) - ymid
+
+  plt.arrow(xmid, ymid, 1*dxmid, 1*dymid, width=0, head_width=0.15,
+      head_starts_at_zero=True, length_includes_head=True, ec="None", fc="green", zorder=10)
+
+  x1 = xmid+xarrowoffset
+  y1 = ymid+yarrowoffset
+  ax.text(x1, y1, name, fontsize=35)
+
+  plt.plot(p1, p2, linewidth=5, color= colour)
   
 def plotPathCylindrical(fname, colour):
   Qu = np.array(getPath(fname))
@@ -245,9 +255,7 @@ def getPoints(fname, maxElements = float('inf')):
   for child in root.findall('state'):
     if ctr > maxElements:
       return Q
-    sufficient = child.get('sufficient')
     feasible = child.get('feasible')
-    open_ball_radius = child.get('open_ball_radius')
     state = child.text
     state = state.split(" ")
 
@@ -255,14 +263,7 @@ def getPoints(fname, maxElements = float('inf')):
       feasible = True
     else:
       feasible = False
-    if sufficient=='yes':
-      sufficient = True
-    else:
-      sufficient = False
     q = list()
-    q.append(feasible)
-    q.append(sufficient)
-    q.append(open_ball_radius)
 
     for s in state:
       if s != '':
@@ -302,22 +303,21 @@ def generateInfeasibleSamplesTwoDim(fname, dim1=0, dim2=1, maxElements = float('
   P2 = []
   ctr = 0
   for q in Q:
-    feasible = q[0]
+    # feasible = q[0]
     #sufficient = q[1]
     #ball_radius = q[2]
     #num_states = q[3]
-    x = q[4+dim1]
-    y = q[4+dim2]
-    if not feasible:
-      ctr += 1
-      P1 = np.append(P1,x)
-      P2 = np.append(P2,y)
+    x = q[1+dim1]
+    y = q[1+dim2]
+    ctr += 1
+    P1 = np.append(P1,x)
+    P2 = np.append(P2,y)
     if ctr > maxElements:
       break
   return [P1,P2]
 
 
-def PlotSamples(fname, dim1=4, dim2=5, maxElements=float('inf')):
+def PlotSamples(fname, dim1=1, dim2=4, maxElements=float('inf')):
   Q = np.array(getPoints(fname))
   feasible = np.array(Q[:,0]).astype(bool)
   notFeasible = ~feasible

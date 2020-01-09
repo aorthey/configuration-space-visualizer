@@ -110,7 +110,7 @@ def plotCSpaceDelaunayGrey(fname1,fname2,fname3,P1,P2,maximumEdgeLength=0.2, sha
   Qu = np.array(getPath(fname1))
   
   plt.scatter(Qu[0,0], Qu[0,1], marker = "o", s=20, linewidths = 5, color = "green")
-  plt.scatter(Qu[Qu.size/2 - 1,0], Qu[Qu.size/2 - 1,1], marker = "x", s=50, linewidths = 5, color = "red")
+  plt.scatter(Qu[Qu.size//2 - 1,0], Qu[Qu.size//2 - 1,1], marker = "x", s=50, linewidths = 5, color = "red")
   
   zFaces = np.ones(triangles.shape[0])
   cmap = colors.LinearSegmentedColormap.from_list("", [(shade,shade,shade),"grey","grey"])
@@ -200,9 +200,9 @@ def plotStartGoal(fname):
   startx = np.cos(Qu[0,0].astype(float))
   starty = np.sin(Qu[0,0].astype(float))
   startz = Qu[0,1].astype(float)
-  goalx = np.cos(Qu[Qu.size/2 - 1,0].astype(float))
-  goaly = np.sin(Qu[Qu.size/2 - 1,0].astype(float))
-  goalz = Qu[Qu.size/2 - 1,1].astype(float)
+  goalx = np.cos(Qu[Qu.size//2 - 1,0].astype(float))
+  goaly = np.sin(Qu[Qu.size//2 - 1,0].astype(float))
+  goalz = Qu[Qu.size//2 - 1,1].astype(float)
   #plt.scatter(math.cos(Qu[0,1]), math.sin(Qu[0,1]), Qu[0,0], marker = "o", s=20, linewidths = 5, color = "green")
   #plt.scatter(math.cos(Qu[Qu.size/2 - 1,1]), math.sin(Qu[Qu.size/2 - 1,1]), Qu[Qu.size/2 - 1,0], marker = "x", s=50, linewidths = 5, color = "red")
   plt.plot([startx], [starty], [startz], marker = "o", markersize = pointsize/2, color = "green")

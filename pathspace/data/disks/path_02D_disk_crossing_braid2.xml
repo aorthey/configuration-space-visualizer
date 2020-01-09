@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<path_piecewise_linear>
+    <length>4</length>
+    <number_of_milestones>11</number_of_milestones>
+    <!--Interlength: Length between States-->
+    <interlength>0.836348</interlength>
+    <interlength>0.836348</interlength>
+    <interlength>0.0910735</interlength>
+    <interlength>0.0910735</interlength>
+    <interlength>0.157498</interlength>
+    <interlength>0.157498</interlength>
+    <interlength>0.106534</interlength>
+    <interlength>0.106534</interlength>
+    <interlength>0.808547</interlength>
+    <interlength>0.808547</interlength>
+    <!--Smoothed States: Sequence of Configurations in Configuration Space-->
+    <state>4  -1 0 0 -1 </state>
+    <state>4  -0.777929 0 0 -0.385723 </state>
+    <state>4  -0.555858 0 0 0.228553 </state>
+    <state>4  -0.523648 0 0 0.287418 </state>
+    <state>4  -0.491439 0 0 0.346282 </state>
+    <state>4  -0.415206 0 0 0.427546 </state>
+    <state>4  -0.338973 0 0 0.508811 </state>
+    <state>4  -0.263067 0 0 0.539439 </state>
+    <state>4  -0.187162 0 0 0.570068 </state>
+    <state>4  0.406419 0 0 0.785034 </state>
+    <state>4  1 0 0 1 </state>
+    <!--Raw States: Unsmoothed-->
+    <rawstate>4  -1 0 0 -1 </rawstate>
+    <rawstate>4  -0.992836 0 0 -0.980185 </rawstate>
+    <rawstate>4  -0.985673 0 0 -0.960369 </rawstate>
+    <rawstate>4  -0.978509 0 0 -0.940554 </rawstate>
+    <rawstate>4  -0.971346 0 0 -0.920738 </rawstate>
+    <rawstate>4  -0.964182 0 0 -0.900923 </rawstate>
+    <rawstate>4  -0.957018 0 0 -0.881108 </rawstate>
+    <rawstate>4  -0.949855 0 0 -0.861292 </rawstate>
+    <rawstate>4  -0.942691 0 0 -0.841477 </rawstate>
+    <rawstate>4  -0.935528 0 0 -0.821662 </rawstate>
+    <rawstate>4  -0.928364 0 0 -0.801846 </rawstate>
+    <rawstate>4  -0.921201 0 0 -0.782031 </rawstate>
+    <rawstate>4  -0.914037 0 0 -0.762215 </rawstate>
+    <rawstate>4  -0.906873 0 0 -0.7424 </rawstate>
+    <rawstate>4  -0.89971 0 0 -0.722585 </rawstate>
+    <rawstate>4  -0.892546 0 0 -0.702769 </rawstate>
+    <rawstate>4  -0.885383 0 0 -0.682954 </rawstate>
+    <rawstate>4  -0.878219 0 0 -0.663139 </rawstate>
+    <rawstate>4  -0.871055 0 0 -0.643323 </rawstate>
+    <rawstate>4  -0.863892 0 0 -0.623508 </rawstate>
+    <rawstate>4  -0.856728 0 0 -0.603692 </rawstate>
+    <rawstate>4  -0.849565 0 0 -0.583877 </rawstate>
+    <rawstate>4  -0.842401 0 0 -0.564062 </rawstate>
+    <rawstate>4  -0.835238 0 0 -0.544246 </rawstate>
+    <rawstate>4  -0.828074 0 0 -0.524431 </rawstate>
+    <rawstate>4  -0.82091 0 0 -0.504616 </rawstate>
+    <rawstate>4  -0.813747 0 0 -0.4848 </rawstate>
+    <rawstate>4  -0.806583 0 0 -0.464985 </rawstate>
+    <rawstate>4  -0.79942 0 0 -0.445169 </rawstate>
+    <rawstate>4  -0.792256 0 0 -0.425354 </rawstate>
+    <rawstate>4  -0.785092 0 0 -0.405539 </rawstate>
+    <rawstate>4  -0.777929 0 0 -0.385723 </rawstate>
+    <rawstate>4  -0.770765 0 0 -0.365908 </rawstate>
+    <rawstate>4  -0.763602 0 0 -0.346093 </rawstate>
+    <rawstate>4  -0.756438 0 0 -0.326277 </rawstate>
+    <rawstate>4  -0.749275 0 0 -0.306462 </rawstate>
+    <rawstate>4  -0.742111 0 0 -0.286646 </rawstate>
+    <rawstate>4  -0.734947 0 0 -0.266831 </rawstate>
+    <rawstate>4  -0.727784 0 0 -0.247016 </rawstate>
+    <rawstate>4  -0.72062 0 0 -0.2272 </rawstate>
+    <rawstate>4  -0.713457 0 0 -0.207385 </rawstate>
+    <rawstate>4  -0.706293 0 0 -0.187569 </rawstate>
+    <rawstate>4  -0.699129 0 0 -0.167754 </rawstate>
+    <rawstate>4  -0.691966 0 0 -0.147939 </rawstate>
+    <rawstate>4  -0.684802 0 0 -0.128123 </rawstate>
+    <rawstate>4  -0.677639 0 0 -0.108308 </rawstate>
+    <rawstate>4  -0.670475 0 0 -0.0884926 </rawstate>
+    <rawstate>4  -0.663312 0 0 -0.0686772 </rawstate>
+    <rawstate>4  -0.656148 0 0 -0.0488618 </rawstate>
+    <rawstate>4  -0.648984 0 0 -0.0290464 </rawstate>
+    <rawstate>4  -0.641821 0 0 -0.00923107 </rawstate>
+    <rawstate>4  -0.634657 0 0 0.0105843 </rawstate>
+    <rawstate>4  -0.627494 0 0 0.0303997 </rawstate>
+    <rawstate>4  -0.62033 0 0 0.0502151 </rawstate>
+    <rawstate>4  -0.613166 0 0 0.0700304 </rawstate>
+    <rawstate>4  -0.606003 0 0 0.0898458 </rawstate>
+    <rawstate>4  -0.598839 0 0 0.109661 </rawstate>
+    <rawstate>4  -0.591676 0 0 0.129477 </rawstate>
+    <rawstate>4  -0.584512 0 0 0.149292 </rawstate>
+    <rawstate>4  -0.577349 0 0 0.169107 </rawstate>
+    <rawstate>4  -0.570185 0 0 0.188923 </rawstate>
+    <rawstate>4  -0.563021 0 0 0.208738 </rawstate>
+    <rawstate>4  -0.555858 0 0 0.228553 </rawstate>
+    <rawstate>4  -0.546616 0 0 0.246581 </rawstate>
+    <rawstate>4  -0.537374 0 0 0.264609 </rawstate>
+    <rawstate>4  -0.528133 0 0 0.282637 </rawstate>
+    <rawstate>4  -0.518891 0 0 0.300665 </rawstate>
+    <rawstate>4  -0.509649 0 0 0.318693 </rawstate>
+    <rawstate>4  -0.500408 0 0 0.336721 </rawstate>
+    <rawstate>4  -0.48247 0 0 0.355842 </rawstate>
+    <rawstate>4  -0.464533 0 0 0.374963 </rawstate>
+    <rawstate>4  -0.446596 0 0 0.394084 </rawstate>
+    <rawstate>4  -0.428659 0 0 0.413205 </rawstate>
+    <rawstate>4  -0.410722 0 0 0.432326 </rawstate>
+    <rawstate>4  -0.392784 0 0 0.451447 </rawstate>
+    <rawstate>4  -0.374847 0 0 0.470568 </rawstate>
+    <rawstate>4  -0.35691 0 0 0.489689 </rawstate>
+    <rawstate>4  -0.338973 0 0 0.508811 </rawstate>
+    <rawstate>4  -0.321561 0 0 0.516013 </rawstate>
+    <rawstate>4  -0.304149 0 0 0.523216 </rawstate>
+    <rawstate>4  -0.286737 0 0 0.530418 </rawstate>
+    <rawstate>4  -0.269326 0 0 0.537621 </rawstate>
+    <rawstate>4  -0.251914 0 0 0.544824 </rawstate>
+    <rawstate>4  -0.234502 0 0 0.552026 </rawstate>
+    <rawstate>4  -0.21709 0 0 0.559229 </rawstate>
+    <rawstate>4  -0.197138 0 0 0.566455 </rawstate>
+    <rawstate>4  -0.177186 0 0 0.573681 </rawstate>
+    <rawstate>4  -0.157233 0 0 0.580906 </rawstate>
+    <rawstate>4  -0.137281 0 0 0.588132 </rawstate>
+    <rawstate>4  -0.117329 0 0 0.595358 </rawstate>
+    <rawstate>4  -0.0973764 0 0 0.602584 </rawstate>
+    <rawstate>4  -0.0774241 0 0 0.609809 </rawstate>
+    <rawstate>4  -0.0574718 0 0 0.617035 </rawstate>
+    <rawstate>4  -0.0375195 0 0 0.624261 </rawstate>
+    <rawstate>4  -0.0175672 0 0 0.631487 </rawstate>
+    <rawstate>4  0.00238512 0 0 0.638712 </rawstate>
+    <rawstate>4  0.0223374 0 0 0.645938 </rawstate>
+    <rawstate>4  0.0422897 0 0 0.653164 </rawstate>
+    <rawstate>4  0.062242 0 0 0.66039 </rawstate>
+    <rawstate>4  0.0821943 0 0 0.667615 </rawstate>
+    <rawstate>4  0.102147 0 0 0.674841 </rawstate>
+    <rawstate>4  0.122099 0 0 0.682067 </rawstate>
+    <rawstate>4  0.142051 0 0 0.689293 </rawstate>
+    <rawstate>4  0.162004 0 0 0.696518 </rawstate>
+    <rawstate>4  0.181956 0 0 0.703744 </rawstate>
+    <rawstate>4  0.201908 0 0 0.71097 </rawstate>
+    <rawstate>4  0.22186 0 0 0.718196 </rawstate>
+    <rawstate>4  0.241813 0 0 0.725421 </rawstate>
+    <rawstate>4  0.261765 0 0 0.732647 </rawstate>
+    <rawstate>4  0.281717 0 0 0.739873 </rawstate>
+    <rawstate>4  0.30167 0 0 0.747099 </rawstate>
+    <rawstate>4  0.321622 0 0 0.754324 </rawstate>
+    <rawstate>4  0.341574 0 0 0.76155 </rawstate>
+    <rawstate>4  0.361526 0 0 0.768776 </rawstate>
+    <rawstate>4  0.381479 0 0 0.776002 </rawstate>
+    <rawstate>4  0.401431 0 0 0.783227 </rawstate>
+    <rawstate>4  0.421383 0 0 0.790453 </rawstate>
+    <rawstate>4  0.441336 0 0 0.797679 </rawstate>
+    <rawstate>4  0.461288 0 0 0.804905 </rawstate>
+    <rawstate>4  0.48124 0 0 0.81213 </rawstate>
+    <rawstate>4  0.501193 0 0 0.819356 </rawstate>
+    <rawstate>4  0.521145 0 0 0.826582 </rawstate>
+    <rawstate>4  0.541097 0 0 0.833808 </rawstate>
+    <rawstate>4  0.561049 0 0 0.841033 </rawstate>
+    <rawstate>4  0.581002 0 0 0.848259 </rawstate>
+    <rawstate>4  0.600954 0 0 0.855485 </rawstate>
+    <rawstate>4  0.620906 0 0 0.862711 </rawstate>
+    <rawstate>4  0.640859 0 0 0.869936 </rawstate>
+    <rawstate>4  0.660811 0 0 0.877162 </rawstate>
+    <rawstate>4  0.680763 0 0 0.884388 </rawstate>
+    <rawstate>4  0.700716 0 0 0.891614 </rawstate>
+    <rawstate>4  0.720668 0 0 0.898839 </rawstate>
+    <rawstate>4  0.74062 0 0 0.906065 </rawstate>
+    <rawstate>4  0.760572 0 0 0.913291 </rawstate>
+    <rawstate>4  0.780525 0 0 0.920517 </rawstate>
+    <rawstate>4  0.800477 0 0 0.927742 </rawstate>
+    <rawstate>4  0.820429 0 0 0.934968 </rawstate>
+    <rawstate>4  0.840382 0 0 0.942194 </rawstate>
+    <rawstate>4  0.860334 0 0 0.94942 </rawstate>
+    <rawstate>4  0.880286 0 0 0.956645 </rawstate>
+    <rawstate>4  0.900239 0 0 0.963871 </rawstate>
+    <rawstate>4  0.920191 0 0 0.971097 </rawstate>
+    <rawstate>4  0.940143 0 0 0.978323 </rawstate>
+    <rawstate>4  0.960095 0 0 0.985548 </rawstate>
+    <rawstate>4  0.980048 0 0 0.992774 </rawstate>
+    <rawstate>4  1 0 0 1 </rawstate>
+</path_piecewise_linear>
