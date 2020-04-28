@@ -13,71 +13,120 @@ rc('font', family='serif', size=28)
 
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
+from matplotlib import cm
+
 from scipy.spatial import Delaunay
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import FancyArrowPatch
+from scipy.spatial import ConvexHull
 from mpl_toolkits.mplot3d import proj3d
 
 pointsize = 20
 
-#plots the 2D triangulated space with all infeasible points in grey and three possible paths in different colors
-def plotCSpace3DGrey(ax,P1,P2,P3,fname1,fname2,fname3,fname4,X=0.01,zorder=2,maximumEdgeLength=0.2, shade=0.8):
-  points2D=np.vstack([P2,P3]).T
-  tri = Delaunay(points2D)
-  # print tri.simplices.shape, '\n', tri.simplices[0]
-  zorderPath = 0.5
-  zorderText = 11
-  plotPath3D(fname1, 'magenta', zorder = zorderPath)
-  ax.text(1,0,-5,r'$p_1$',zorder = zorderText)
-  plotPath3D(fname2, 'magenta', zorder = zorderPath)
-  #use, when not showing theta-x and theta-y planes
-  #ax.text(0,-0.2,1,r'$p_2$',zorder = 11)
-  ax.text(-0.7,-0.5,0.8,r'$p_2$',zorder = zorderText)
-  plotPath3D(fname3, 'magenta', zorder = zorderPath)
-  ax.text(0.2,-1,0.5,r'$p_3$', zorder = zorderText)
-  plotPath3D(fname4, 'magenta', zorder = zorderPath)
-  ax.text(1.3,0.3,0,r'$p_4$', zorder = zorderText)
-  plotStartGoal3D(fname1)
+def plotRectangle(ax, zoffset):
+  v1=[-1,-1,zoffset]
+  v2=[+1,-1,zoffset]
+  v3=[+1,+1,zoffset]
+  v4=[-1,+1,zoffset]
 
-  xpp = -0.4
-  zorderMiddle = 4
-  plotPathPart3D(fname1, 'magenta',xpp,zorder = zorderMiddle)
-  plotPathPart3D(fname2, 'magenta',xpp,zorder = zorderMiddle)
-  plotPathPart3D(fname3, 'magenta',xpp,zorder = zorderMiddle)
-  plotPathPart3D(fname4, 'magenta',xpp,zorder = zorderMiddle)
-  
-  xpp = 0.4
-  zorderEnd = 10
-  plotPathPart3D(fname1, 'magenta',xpp,zorder = zorderEnd)
-  plotPathPart3D(fname2, 'magenta',xpp,zorder = zorderEnd)
-  plotPathPart3D(fname3, 'magenta',xpp,zorder = zorderEnd)
-  plotPathPart3D(fname4, 'magenta',xpp,zorder = zorderEnd)
+  pts = np.array([v1,v2,v3,v4]).T
+  ptsEnd = np.roll(pts,-1,1)
 
+  for i in range(4):
+    ax.plot([pts[0,i], ptsEnd[0,i]],
+            [pts[1,i],ptsEnd[1,i]],
+            zs=[pts[2,i],ptsEnd[2,i]], color='k', linestyle='--')
+
+def plotCube(ax):
+  plotRectangle(ax, -1)
+  plotRectangle(ax, +1)
+
+  plotZAxisLine(ax, -1, -1)
+  plotZAxisLine(ax, -1, +1)
+  plotZAxisLine(ax, +1, -1)
+  plotZAxisLine(ax, +1, +1)
+
+def plotSphere(ax, x, y, z, R, color='g'):
+  N=20
+  stride=1
+  u = np.linspace(0, 2 * np.pi, N)
+  v = np.linspace(0, np.pi, N)
+  x = np.outer(np.cos(u), R*np.sin(v)) + x
+  y = np.outer(np.sin(u), R*np.sin(v)) + y
+  z = np.outer(np.ones(np.size(u)), R*np.cos(v)) +z
+  ax.plot_surface(x, y, z, linewidth=0.0, cstride=stride, rstride=stride,
+      color=color)
+
+def plotSpheres(ax, R):
+  plotLine(ax, [0,-1,0], [0,+1,0])
+  plotSphere(ax, 0, -1, 0, R, 'g')
+  plotSphere(ax, 0, +1, 0, R, 'r')
+
+  plotLine(ax, [-1,0,0], [+1,0,0])
+  plotSphere(ax, -1, 0, 0, R, 'g')
+  plotSphere(ax, +1, 0, 0, R, 'r')
+
+  plotLine(ax, [0,0,-1], [0,0,+1])
+  plotSphere(ax, 0, 0, -1, R, 'g')
+  plotSphere(ax, 0, 0, +1, R, 'r')
+
+def plotLine(ax, v1, v2):
+    ax.plot(
+        [v1[0],v2[0]],
+        [v1[1],v2[1]],
+        zs=[v1[2],v2[2]],
+        color='k', linewidth=2, linestyle='-')
+
+def plotZAxisLine(ax, x, y):
+  ax.plot([x, x], [y, y], [-1, 1], color='k', linestyle='--')
+
+
+def plotCSpace3DAll(ax, P1, P2, P3):
   triangles = np.empty((0,3),dtype=int)
 
-  for i in range(0, tri.simplices.shape[0]):
-    simplex = tri.simplices[i]
-    x = tri.points[simplex[0]]
-    y = tri.points[simplex[1]]
-    z = tri.points[simplex[2]]
-    d0 = np.sqrt(np.dot(x-y,x-y))
-    d1 = np.sqrt(np.dot(x-z,x-z))
-    d2 = np.sqrt(np.dot(z-y,z-y))
-    max_edge = max([d0, d1, d2])
-    if max_edge <= maximumEdgeLength:
-      triangles = np.vstack((triangles, simplex))
+  pts = np.array([P1,P2,P3]).T
+  hull = ConvexHull(pts, qhull_options="QJ")
+  for i in range(0, hull.simplices.shape[0]):
+    simplex = hull.simplices[i]
+    triangles = np.vstack((triangles, simplex))
 
-  Px = np.linspace(X+0.00000001,X-0.00000001, P2.size)
-  ax.plot_trisurf(Px,P2, P3, triangles=triangles, alpha=1, color = "whitesmoke", facecolors = "grey", zorder = zorder)
+  ax.plot_trisurf(P1, P2, P3, triangles=triangles, zorder=10, alpha=0.5, linewidth=0, edgecolor='none',
+      cmap=cm.gray, facecolors = 'grey')
   
+def updateTriangles(triangles, P1, P2, P3, idx_valid):
+  P1I = P1[idx_valid]
+  P2I = P2[idx_valid]
+  P3I = P3[idx_valid]
+
+  pts = np.array([P1I,P2I,P3I]).T
+  hull = ConvexHull(pts, qhull_options="QJ")
+  for i in range(0, hull.simplices.shape[0]):
+    simplex = hull.simplices[i]
+    simplex = idx_valid[simplex]
+    triangles = np.vstack((triangles, simplex))
+
+  return triangles
+
+def plotCSpace3DGreyValid(ax, P1, P2, P3):
+  triangles = np.empty((0,3),dtype=int)
+
+  dist = 0.20
+
+  idx_valid = np.array(np.where( (abs(P1)<=dist) & (abs(P2)<=dist))).flatten()
+  triangles = updateTriangles(triangles, P1, P2, P3, idx_valid)
+
+  idx_valid = np.array(np.where( (abs(P2)<=dist) & (abs(P3)<=dist))).flatten()
+  triangles = updateTriangles(triangles, P1, P2, P3, idx_valid)
+
+  idx_valid = np.array(np.where( (abs(P1)<=dist) & (abs(P3)<=dist))).flatten()
+  triangles = updateTriangles(triangles, P1, P2, P3, idx_valid)
+
+  ax.plot_trisurf(P1, P2, P3, triangles=triangles, alpha=0.5, zorder=1, linewidth=0, edgecolor='none',
+      facecolors = 'grey', 
+      cmap=cm.gray)
+
 def plotCSpaceXYProjection(ax,P1,P2,P3,fname1,fname2,fname3,fname4,Z=0,maximumEdgeLength=0.2, shade=0.8):
 
-  plotPathXYProjection(fname1, 'magenta', Z)
-  #ax.text(1.5,-0.8,Z,r'$\pi(p_1),\pi(p_3)$')
-  plotPathXYProjection(fname2, 'magenta', Z)
-  #ax.text(1.5,0.3,Z,r'$\pi(p_2),\pi(p_4)$')
-  plotPathXYProjection(fname3, 'magenta', Z)
-  plotPathXYProjection(fname4, 'magenta', Z)
   plotStartGoalXYProjection(fname1, Z)
   project = Arrow3D([0,0],[0,0],[-8,-15], color = 'black', zorder = 0.05, linewidth= '3', arrowstyle = "-|>", mutation_scale = 20, label = "project")
   ax.add_artist(project)
@@ -140,24 +189,20 @@ def plotStartGoalXYProjection(fname, z):
 def plotPathXYProjection(fname, colour, Z):
   Qu = np.array(getPath(fname))
   p1 = Qu[:,1]
-  p2 = Qu[:,2]
+  p2 = Qu[:,5]
   p3a = Z
   p1 = p1.astype(float)
   p2 = p2.astype(float)
   plt.plot(p1, p2, p3a, linewidth=2.5, color= colour)
   
-def plotPath3D(fname, colour, zorder = 0.3):
+def plotPath3D(fname, colour, zorder = 3):
   Qu = np.array(getPath(fname))
   p1 = Qu[:,1]
-  p2 = Qu[:,2]
-  p3a = Qu[:,3]
+  p2 = Qu[:,5]
+  p3a = Qu[:,9]
   p1 = p1.astype(float)
   p2 = p2.astype(float)
   p3a = p3a.astype(float)
-  #for the first path, so it doesn't jump from pi to -pi
-  for i in range(p3a.size):
-      if p3a[i] == 3.14118:
-          p3a[i:p3a.size] = -p3a[i:p3a.size]
   plt.plot(p1, p2, p3a, linewidth=3, alpha = 1, color= colour, zorder = zorder)
   
 def plotPathPart3D(fname, colour, x, zorder = 3):
@@ -193,45 +238,64 @@ def plotPathPart3D(fname, colour, x, zorder = 3):
   
   plt.plot(p1b, p2b, p3b, linewidth=3, alpha = 1, color= colour, zorder = zorder)
   
+def plotAxesXYZ(ax, x, y, z):
+  zorderAx = 10
+  #plot axes and their labels
+  xaxis = Arrow3D([x,x+1],[y,y],[z,z], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "xaxis", zorder = zorderAx)
+  ax.text(x+1,y-0.5,z,r'$x$', zorder=zorderAx)
+  ax.add_artist(xaxis)
+
+  yaxis = Arrow3D([x,x],[y-0.02,y+1],[z,z], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "yaxis", zorder = zorderAx)
+  ax.text(x-0.4,y+0.7,z,r'$y$', zorder=zorderAx)
+  ax.add_artist(yaxis)
+
+  zaxis =Arrow3D([x,x],[y,y],[z,z + 1], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "zaxis", zorder = zorderAx)
+  ax.text(x-0.3,y-0.3,z+1,r'$z$', zorder=zorderAx)
+  ax.add_artist(zaxis)
+
 def plotAxes(ax, x, y, zhigh, zlow, zorderAx = 10):
   #plot axes and their labels
   xaxis = Arrow3D([x,x+1],[y,y],[zlow,zlow], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "xaxis", zorder = zorderAx)
-  ax.text(x+1,y-0.5,zlow,r'x')
+  ax.text(x+1,y-0.5,zlow,r'$x_1$', zorder=zorderAx)
   ax.add_artist(xaxis)
   xaxishigh = Arrow3D([x,x+1],[y,y],[zhigh,zhigh], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "xaxis", zorder = zorderAx)
-  ax.text(x+1,y-0.5,zhigh,r'x')
+  ax.text(x+1,y-0.5,zhigh,r'$x_1$', zorder=zorderAx)
   ax.add_artist(xaxishigh)
 
-  yaxis = Arrow3D([x,x],[y-0.02,y+0.6],[zlow,zlow], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "yaxis", zorder = zorderAx)
-  ax.text(x-0.4,y+0.7,zlow,r'y')
+  yaxis = Arrow3D([x,x],[y-0.02,y+1],[zlow,zlow], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "yaxis", zorder = zorderAx)
+  ax.text(x-0.4,y+0.7,zlow,r'$x_2$', zorder=zorderAx)
   ax.add_artist(yaxis)
-  yaxishigh = Arrow3D([x,x],[y,y+0.6],[zhigh,zhigh], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "yaxis", zorder = zorderAx)
-  ax.text(x-0.4,y+0.7,zhigh,r'y')
+  yaxishigh = Arrow3D([x,x],[y,y+1],[zhigh,zhigh], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "yaxis", zorder = zorderAx)
+  ax.text(x-0.4,y+0.7,zhigh,r'$x_2$', zorder=zorderAx)
   ax.add_artist(yaxishigh)
 
-  zaxis =Arrow3D([x+0.03,x+0.03],[y,y],[zhigh,zhigh + 5], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "zaxis", zorder = zorderAx)
-  ax.text(x,y-0.1,zhigh+5,r'$\theta$')
+  zaxis =Arrow3D([x,x],[y,y],[zhigh,zhigh + 1], color = 'black', linewidth= '2', arrowstyle = "-|>", mutation_scale = 20, label = "zaxis", zorder = zorderAx)
+  ax.text(x-0.3,y-0.3,zhigh+1,r'$x_3$', zorder=zorderAx)
   ax.add_artist(zaxis)
-  
   
   #plot coordinate planes
   xlin = np.linspace(-x,x, 50)
   ylin = np.linspace(-y,y, 50)
-  zlin = np.linspace(-zhigh,zhigh,50)
+  zlin = np.linspace(zhigh-1,zhigh+1,50)
   
   Xlin1, Ylin1 = np.meshgrid(xlin,ylin)
   Xlin2, Zlin1 = np.meshgrid(xlin,zlin)
   Ylin2, Zlin2 = np.meshgrid(ylin,zlin)
+
+  Zlow = zlow*np.ones(Xlin1.shape)
+  Zhigh = zhigh*np.ones(Xlin1.shape)
   
   #xy
-  ax.plot_wireframe(Xlin1,Ylin1,zlow,rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
-  ax.plot_wireframe(Xlin1,Ylin1,zhigh,rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
+  ax.plot_wireframe(Xlin1,Ylin1,Zlow,rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
+  ax.plot_wireframe(Xlin1,Ylin1,Zhigh,rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
 
+  Y = -y*np.ones(Xlin2.shape)
+  X = x*np.ones(Xlin2.shape)
   #thetax
-  ax.plot_wireframe(Xlin2, -y, Zlin2, rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
+  ax.plot_wireframe(Xlin2, -Y, Zlin2, rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
   
   #thetay
-  ax.plot_wireframe(x, Ylin2,Zlin2, rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
+  ax.plot_wireframe(X, Ylin2, Zlin2, rstride = 10, cstride = 10, zorder = 0.1, color = "silver", alpha = 0.2)
 
 
 def long_edges(x, y, triangles, radio=22):
@@ -314,41 +378,16 @@ def getPath(fname, maxElements = float('inf')):
   
   return Q
   
-def generateInfeasibleSamplesOneDim(fname, dim1=0, maxElements = float('inf')):
-  Q = getPoints(fname)
-  theta = np.linspace(-np.pi,np.pi,100)
-  P1 = []
-  P2 = []
-  ctr = 0
-  for q in Q:
-    feasible = q[0]
-    #sufficient = q[1]
-    #ball_radius = q[2]
-    #num_states = q[3]
-    x = q[4+dim1]
-    if not feasible:
-      ctr += 1
-      for j in range(theta.shape[0]):
-        P1 = np.append(P1,x)
-        P2 = np.append(P2,theta[j])
-    if ctr > maxElements:
-      break
-  # np.save('tmp_QS_dense_1',P1)
-  # np.save('tmp_QS_dense_2',P2)
-  return [P1,P2]
 
-def generateInfeasibleSamplesTwoDim(fname, dim1=0, dim2=1, maxElements = float('inf')):
+def generateSamplesTwoDim(fname, dim1=0, dim2=4, maxElements = float('inf')):
   Q = getPoints(fname)
   P1 = []
   P2 = []
   ctr = 0
   for q in Q:
     feasible = q[0]
-    #sufficient = q[1]
-    #ball_radius = q[2]
-    #num_states = q[3]
-    x = q[4+dim1]
-    y = q[4+dim2]
+    x = float(q[4+dim1])
+    y = float(q[4+dim2])
     if not feasible:
       ctr += 1
       P1 = np.append(P1,x)
@@ -357,7 +396,7 @@ def generateInfeasibleSamplesTwoDim(fname, dim1=0, dim2=1, maxElements = float('
       break
   return [P1,P2]
 
-def generateInfeasibleSamplesThreeDim(fname, dim1=0, dim2=1, dim3=2, maxElements = float('inf')):
+def generateSamples(fname, dim1=0, dim2=4, dim3=8, maxElements = float('inf')):
   Q = getPoints(fname)
   #print(Q)
   P1 = []
@@ -366,92 +405,19 @@ def generateInfeasibleSamplesThreeDim(fname, dim1=0, dim2=1, dim3=2, maxElements
   ctr = 0
   for q in Q:
     feasible = q[0]
-    #sufficient = q[1]
-    #ball_radius = q[2]
-    #num_states = q[3]
     x = float(q[4+dim1])
     y = float(q[4+dim2])
     z = float(q[4+dim3])
     if not feasible:
-      if x < 1 and x > -1 and y < 1.3 and y > -1.3 and z < 4 and z > -4:
-        if z > 2:
-          z = z - np.pi * 2
-        ctr += 1
-        P1 = np.append(P1,x)
-        P2 = np.append(P2,y)
-        P3 = np.append(P3,z)
+      ctr += 1
+      P1 = np.append(P1,x)
+      P2 = np.append(P2,y)
+      P3 = np.append(P3,z)
     if ctr > maxElements:
       break
   
   return [P1,P2,P3]
 
-def plotSamplesOneDim(fname, dim1=0, maxElements = float('inf')):
-  Q = getPoints(fname, maxElements)
-  for q in Q:
-    feasible = q[0]
-    sufficient = q[1]
-    d = float(q[2])
-    x = float(q[4+dim1])
-    if not feasible:
-      plt.axvline(x, color='k', linewidth=1)
-    elif sufficient:
-      plt.axvspan(x-d, x+d, alpha=0.5, hatch="/")
-    else:
-      delta=0.05
-      plt.fill([x-d, x+d, x+d, x-d], [-delta,-delta,+delta,+delta], fill=False, hatch='\\')
-
-def PlotSamples(fname, dim1=4, dim2=5, maxElements=float('inf')):
-  Q = np.array(getPoints(fname))
-  feasible = np.array(Q[:,0]).astype(bool)
-  notFeasible = ~feasible
-
-  t1 = Q[np.where(feasible),dim1].flatten()
-  t2 = Q[np.where(feasible),dim2].flatten()
-  t1 = t1.astype(float)
-  t2 = t2.astype(float)
-
-  t3 = Q[np.where(notFeasible),dim1].flatten()
-  t4 = Q[np.where(notFeasible),dim2].flatten()
-  t3 = t3.astype(float)
-  t4 = t4.astype(float)
-
-  plt.scatter(t1,t2, marker='x', color='green')
-  plt.scatter(t3,t4, marker='o', color='red')
-  
-  plt.show()
-
-def PlotSamples3D(fname, dim1=4, dim2=5, dim3=6, maxElements=float('inf')):
-  Q = np.array(getPoints(fname))
-  feasible = np.array(Q[:,0]).astype(bool)
-  notFeasible = ~feasible
-
-  t1 = Q[np.where(feasible),dim1].flatten()
-  t2 = Q[np.where(feasible),dim2].flatten()
-  t3 = Q[np.where(feasible),dim3].flatten()
-  t1 = t1.astype(float)
-  t2 = t2.astype(float)
-  t3 = t3.astype(float)
-
-  t4 = Q[np.where(notFeasible),dim1].flatten()
-  t5 = Q[np.where(notFeasible),dim2].flatten()
-  t6 = Q[np.where(notFeasible),dim3].flatten()
-  t4 = t4.astype(float)
-  t5 = t5.astype(float)
-  t6 = t6.astype(float)
-
-  #print(t3)
-
-  fig = plt.figure()
-  ax = fig.add_subplot(111, projection='3d')
-
-  ax.scatter(t1, t2, t3, marker='x', color='green')
-  #ax.view_init(azim = 0, elev = 90)
-  #ax.set_yticks([-0.65, 0.6, -0.55, 0, 0.55, 0.6, 0.65])
-  # ax.set_xlabel('X')
-  # ax.set_ylabel('Y')
-  # ax.set_zlabel(r'$\theta$')
-  #plt.scatter(t4, t5, t6, marker='o', color='red')
-  plt.show()
 
 class Arrow3D(FancyArrowPatch):
     def __init__(self, xs, ys, zs, *args, **kwargs):
